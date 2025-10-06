@@ -1,12 +1,12 @@
 # tebby24's arch linux dots
 
 includes configuration for:
-- sway
+- labwc
 - zsh
 - alacritty
 - tmux
 - neovim 
-- ibus/rime (chinese input)
+- chinese input?
 
 ## clone the dotfiles
 must be performed for each user on the machine
