@@ -1,0 +1,44 @@
+/*
+Color Palette
+
+#ffffff
+#e0e0e0
+#5b5b5b
+#171717
+#131313  
+ */
+
+
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "Terminess Nerd Font Propo";
+    font-size: 12px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: #131313;
+    color: #ffffff;
+}
+
+#workspaces button {
+    padding: 0px 1px;
+    margin: 1px 2px;
+    background: transparent;
+    color: #e0e0e0;
+}
+
+#workspaces button.active {
+    background: #262626;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+
+#pulseaudio,
+#battery,
+#network,
+#clock {
+    padding: 0px 10px;
+}

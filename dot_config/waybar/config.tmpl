@@ -1,0 +1,87 @@
+// -*- mode: jsonc -*-
+{
+    "output": {{ .primary_monitor | quote }}, 
+    "position": "bottom", // Waybar position (top|bottom|left|right)
+    "height": 20, // Waybar height (to be removed for auto height)
+    "spacing": 16, // Gaps between modules (4px)
+    "modules-left": [
+        "ext/workspaces"
+    ],
+    "modules-center": [
+    ],
+    "modules-right": [
+        "disk",
+        "pulseaudio",
+        "network",
+        "battery",
+        "clock#date",
+        "clock#time"
+    ],
+
+    "ext/workspaces": {
+        "format": "{name}",
+        "sort-by-id": true,
+        "on-click": "activate"
+    },
+    "disk": {
+        "path": "/home",
+        "format": " {free}",
+        "tooltip": false
+    },
+
+    // --- SEPARATE CLOCK MODULES (NOW USING THE CORRECT '#' INSTANCE SYNTAX) ---
+
+    // Configuration for the date instance
+    "clock#date": {
+        "timezone": "America/Indiana/Indianapolis",
+        // Shows only the calendar icon and date
+        "format": " {:%b %d, %Y}",
+        "tooltip": false,
+        // The tooltip format will still show the calendar when hovered
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+    
+    // Configuration for the time instance
+    "clock#time": {
+        "timezone": "America/Indiana/Indianapolis",
+        // Shows only the clock icon and time
+        "format": " {:%I:%M %p}",
+        "tooltip": false
+    },
+
+    // --- END SEPARATE CLOCK MODULES ---
+
+    "battery": {
+        "states": {
+            // "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-full": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
+        // "format-good": "", // An empty format will hide the module
+        // "format-full": "",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "network": {
+        "format-wifi": " {signalStrength}%",
+        "format-ethernet": "󰈀 {signalStrength}%",
+        "format-disconnected": "",
+        "tooltip": false,
+        "on-click": "nm-connection-editor"
+    },
+    "pulseaudio": {
+        "format": "{icon} {volume}% {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": " {volume}%",
+        "format-source-muted": "",
+        "format-icons": {
+            "default": ["", "", ""] // Mute, Low, Medium, High
+        },
+        "on-click": "pavucontrol"
+    }
+}
+

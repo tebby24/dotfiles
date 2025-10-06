@@ -1,4 +1,5 @@
-# Set a solid background color on all outputs
+kanshi &
+
 swaybg -c '#090b1a' &
 
 waybar --style ~/.config/waybar/style.css &
