@@ -4,7 +4,7 @@ alias la='ls -A'
 alias l='ls -CF'
 
 # xclip
-alias copy='xclip -sel clip'
+alias copy='wl-clipboard -sel clip'
 
 # random commands
 alias printpath='echo "$PATH" | tr ":" "\n"'
