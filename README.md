@@ -1,5 +1,7 @@
 # tebby24's arch linux dots
 
+managed by [chezmoi](https://www.chezmoi.io/)
+
 includes configuration for:
 - labwc
 - zsh
