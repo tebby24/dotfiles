@@ -1,10 +1,9 @@
-# ls
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-# xclip
-alias copy='wl-clipboard -sel clip'
+alias chezmoi='cm'
 
-# random commands
+alias copy='wl-copy'
+
 alias printpath='echo "$PATH" | tr ":" "\n"'
