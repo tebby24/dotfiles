@@ -1,0 +1,50 @@
+# general
+border.width: 0
+
+menu.items.padding.y:4
+menu.items.padding.x:7
+menu.width.min: 140
+menu.width.max: 200
+menu.overlap.x: 2
+menu.overlap.y: 0
+window.label.text.justify: center
+
+# PALETTE
+# https://www.color-hex.com/color-palette/1065297
+
+#ffffff
+#e0e0e0
+#5b5b5b
+#171717
+#131313
+
+# Windows
+window.button.height: 10
+window.titlebar.padding.height: 3
+
+border.width: 0
+
+# Active Windows
+window.active.title.bg.color: #131313
+window.active.label.text.color: #ffffff
+window.active.button.unpressed.image.color: #e0e0e0
+
+# Inactive Windows
+window.inactive.title.bg.color: #171717
+window.inactive.label.text.color: #5b5b5b
+window.inactive.button.unpressed.image.color: #e0e0e0
+
+# menu
+menu.items.bg.color: #212121
+menu.items.text.color: #ffffff
+menu.items.active.bg.color: #5b5b5b 
+menu.items.active.text.color: #ffffff
+menu.separator.width: 1
+menu.separator.padding.width: 6
+menu.separator.padding.height: 3
+menu.separator.color: #e0e0e0
+
+# unused
+# window.active.border.color: #3f3f3fee
+# window.active.indicator.toggled-keybind.color: #ff0000
+# window.inactive.border.color: #242425 81
