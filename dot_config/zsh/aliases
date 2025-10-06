@@ -1,0 +1,10 @@
+# ls
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# xclip
+alias copy='xclip -sel clip'
+
+# random commands
+alias printpath='echo "$PATH" | tr ":" "\n"'
