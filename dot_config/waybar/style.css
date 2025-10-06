@@ -13,7 +13,7 @@ Color Palette
     border: none;
     border-radius: 0;
     font-family: "Terminess Nerd Font Propo";
-    font-size: 15px;
+    font-size: 12px;
     min-height: 0;
 }
 
@@ -23,6 +23,7 @@ window#waybar {
 }
 
 #workspaces button {
+    font-family: "Terminess Nerd Font Mono";
     padding: 0px 1px;
     margin: 1px 2px;
     background: transparent;
