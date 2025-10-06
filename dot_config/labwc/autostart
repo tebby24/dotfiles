@@ -4,8 +4,8 @@ swaybg -c '#090b1a' &
 
 waybar --style ~/.config/waybar/style.css &
 
-export GTK_IM_MODULE=fcitx
-export QT_IM_MODULE=fcitx
+export INPUT_METHOD=fcitx
 export XMODIFIERS=@im=fcitx
+export QT_IM_MODULE=fcitx
 
 fcitx5 -d &
