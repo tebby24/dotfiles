@@ -1,0 +1,69 @@
+#!/bin/bash
+
+CONFIG_FILE="$HOME/.config/tms/tms-dirs.conf"
+
+if [[ ! -f "$CONFIG_FILE" ]]; then
+    echo "Configuration file not found: $CONFIG_FILE"
+    echo "Please create a file at this location and add the directories you want to sessionize."
+    echo "Example content:"
+    echo ""
+    echo "~/dev/projects"
+    echo "~/Documents/notes"
+    echo "~/school/classes"
+    echo ""
+    exit 1
+fi
+
+directories=()
+
+while IFS= read -r line || [[ -n "$line" ]]; do
+    # Skip empty lines or lines that are comments
+    [[ -z "$line" || "$line" =~ ^# ]] && continue
+
+    # Perform the tilde expansion
+    expanded_path="${line/\~/$HOME}"
+
+    # Add the expanded path to our array if it's a valid directory
+    if [[ -d "$expanded_path" ]]; then
+        directories+=("$expanded_path")
+    else
+        echo "Warning: Directory not found and will be skipped: $line" >&2
+    fi
+done < "$CONFIG_FILE"
+
+if [[ ${#directories[@]} -eq 0 ]]; then
+    echo "No valid directories found in $CONFIG_FILE. Exiting."
+    exit 1
+fi
+
+if [[ $# -eq 1 ]]; then
+    selected=$1
+else
+    # Pass the array of valid directories to find
+    selected=$(find "${directories[@]}" -mindepth 1 -maxdepth 1 -type d | fzf)
+fi
+
+if [[ -z $selected ]]; then
+    exit 0
+fi
+
+# Use the last two path components to generate a unique session name
+# e.g., /home/user/.config/chezmoi -> .config-chezmoi
+selected_name=$(echo "$selected" | sed -E 's/.*\/([^/]+\/[^/]+)$/\1/' | tr / - | tr . _)
+
+tmux_running=$(pgrep tmux)
+
+if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+    tmux new-session -s $selected_name -c $selected
+    exit 0
+fi
+
+if ! tmux has-session -t=$selected_name 2> /dev/null; then
+    tmux new-session -ds $selected_name -c $selected
+fi
+
+if [[ -z $TMUX ]]; then
+    tmux attach -t $selected_name
+else
+    tmux switch-client -t $selected_name
+fi
