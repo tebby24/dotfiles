@@ -3,3 +3,5 @@ kanshi &
 swaybg -c '#090b1a' &
 
 waybar --style ~/.config/waybar/style.css &
+
+fcitx5 &
