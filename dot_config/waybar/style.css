@@ -24,7 +24,7 @@ window#waybar {
 
 #workspaces button {
     font-family: "Terminess Nerd Font Mono";
-    padding: 0px 1px;
+    padding: 0px 4px;
     margin: 1px 2px;
     background: transparent;
     color: #e0e0e0;
