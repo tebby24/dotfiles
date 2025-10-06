@@ -94,12 +94,12 @@
 
 
     <!--
-    The following keybind modifiers are supported:
-      W - window/super/logo
-      A - alt
-      C - ctrl
-      S - shift
-  -->
+        The following keybind modifiers are supported:
+        W - window/super/logo
+        A - alt
+        C - ctrl
+        S - shift
+    -->
     <keyboard>
         <layoutScope>global</layoutScope>
         <repeatRate>25</repeatRate>
