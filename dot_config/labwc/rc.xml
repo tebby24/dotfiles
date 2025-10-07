@@ -135,6 +135,10 @@
             <action name="Execute" command="sh ~/scripts/shared/powermenu"/>
         </keybind>
 
+        <keybind key="W-q">
+            <action name="Close" />
+        </keybind>
+
         <keybind key="W-f">
             <action name="SnapToEdge" direction="center" />
         </keybind>
@@ -167,9 +171,6 @@
             <action name="Execute" command="brightnessctl set 10%-" />
         </keybind>
 
-        <keybind key="W-C-e">
-            <action name="Exit" />
-        </keybind>
         <keybind key="W-C-r">
             <action name="Reconfigure" />
         </keybind>
