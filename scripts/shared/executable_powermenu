@@ -2,7 +2,7 @@
 
 # Simple fuzzel power menu for LabWC, with confirmation prompts
 
-chosen=$(printf "logout\nswitch user\nshutdown\nreboot" | fuzzel --dmenu -p "Select action: ")
+chosen=$(printf "logout\nswitch user\nshutdown\nreboot" | fuzzel --dmenu)
 
 confirm() {
     action=$1
