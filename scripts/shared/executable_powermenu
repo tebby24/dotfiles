@@ -13,7 +13,7 @@ confirm() {
 case "$chosen" in
   "logout")
     if confirm "log out"; then
-        labwcctl exit
+        labwc -e
     fi
     ;;
   "switch user")
