@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Simple fuzzel power menu for LabWC
+
+chosen=$(printf "logout\nswitch user\nshutdown\nreboot" | fuzzel --dmenu)
+
+case "$chosen" in
+  "logout")
+    labwcctl exit   # Gracefully log out of LabWC
+    ;;
+  "switch user")
+    dm-tool switch-to-greeter
+    ;;
+  "shutdown")
+    systemctl poweroff
+    ;;
+  "reboot")
+    systemctl reboot
+    ;;
+  *)
+    exit 0
+    ;;
+esac
+
