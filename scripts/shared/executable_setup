@@ -15,7 +15,7 @@ fi
 yay -S --needed --noconfirm neovim-nightly-bin
 
 if [[ "$SHELL" != "/bin/zsh" ]]; then
-  chsh -s /bin/zsh
+  chsh -s /usr/bin/zsh
 fi
 
 chezmoi apply -v
