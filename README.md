@@ -22,18 +22,9 @@ chezmoi init tebby24
 ```
 ```shell
 chezmoi apply -v
-
 ```
 
 ## other configuration
-
-### setup AUR helper
-```shell
-mkdir ~/aur-builds && cd ~/aur-builds
-git clone https://aur.archlinux.org/yay.git
-cd yay
-makepkg -si
-```
 
 ### setup ssh key with github
 this is necessary to push dotfile changes to the remote repo
