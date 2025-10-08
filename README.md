@@ -8,10 +8,17 @@ includes configuration for:
 - alacritty
 - tmux
 - neovim 
-- chinese input?
+- fcitx5
 
-## clone the dotfiles
+## setup a new computer
+### install relevant packages
 must be performed for each user on the machine
+```shell
+sudo pacman -Syu chezmoi
+```
+```shell
+
+```
 
 ## other configuration
 

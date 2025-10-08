@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 
 <labwc_config>
-
     <core>
         <decoration>server</decoration>
         <maximizedDecoration>titlebar</maximizedDecoration>
