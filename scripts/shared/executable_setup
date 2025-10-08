@@ -3,7 +3,7 @@ set -e
 
 echo "Starting system setup..."
 
-sudo pacman -Syu --needed --noconfirm base-devel zsh alacritty tmux neovim
+sudo pacman -Syu --needed --noconfirm base-devel labwc zsh alacritty tmux
 
 if ! command -v yay >/dev/null 2>&1; then
   mkdir -p ~/aur-builds && cd ~/aur-builds
@@ -11,6 +11,8 @@ if ! command -v yay >/dev/null 2>&1; then
   cd yay
   makepkg -si --noconfirm
 fi
+
+yay -S --needed --noconfirm neovim-nightly
 
 if [[ "$SHELL" != "/bin/zsh" ]]; then
   chsh -s /bin/zsh
