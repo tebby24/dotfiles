@@ -14,9 +14,14 @@ includes configuration for:
 ### install relevant packages
 must be performed for each user on the machine
 ```shell
-sudo pacman -Syu chezmoi
+sudo pacman -Syu chezmoi git
 ```
 ```shell
+chezmoi init tebby24
+
+```
+```shell
+chezmoi apply -v
 
 ```
 
