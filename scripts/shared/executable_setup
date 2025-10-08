@@ -12,7 +12,7 @@ if ! command -v yay >/dev/null 2>&1; then
   makepkg -si --noconfirm
 fi
 
-yay -S --needed --noconfirm neovim-nightly
+yay -S --needed --noconfirm neovim-nightly-bin
 
 if [[ "$SHELL" != "/bin/zsh" ]]; then
   chsh -s /bin/zsh
