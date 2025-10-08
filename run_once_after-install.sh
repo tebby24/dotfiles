@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 echo "Running initial setup..."
-"$(chezmoi source-path)/scripts/shared/setup"
+"$CHEZMOI_SOURCE_DIR/scripts/shared/executable_setup"
