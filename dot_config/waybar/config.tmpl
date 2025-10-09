@@ -15,7 +15,8 @@
         "network",
         "battery",
         "clock#date",
-        "clock#time"
+        "clock#time",
+        "custom/hostuser"
     ],
 
     "ext/workspaces": {
@@ -71,6 +72,10 @@
             "default": ["", "", ""] // Mute, Low, Medium, High
         },
         "on-click": "pavucontrol"
+    }
+    "custom/hostuser": {
+    "format": "{{ .chezmoi.hostname }} ({{ .chezmoi.username }})",
+    "tooltip": false
     }
 }
 
