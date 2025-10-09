@@ -3,7 +3,7 @@ set -e
 
 echo "Starting system setup..."
 
-sudo pacman -Syu --needed --noconfirm base-devel labwc zsh alacritty tmux
+sudo pacman -Syu --needed --noconfirm base-devel labwc zsh alacritty tmux fcitx5 fcitx5-chinese-addons fcitx5-configtool fcitx5-qt
 
 if ! command -v yay >/dev/null 2>&1; then
   mkdir -p ~/aur-builds && cd ~/aur-builds
@@ -19,4 +19,13 @@ if [[ "$SHELL" != "/usr/bin/zsh" ]]; then
 fi
 
 echo "✅ Setup complete"
+
+local/fcitx5 5.1.14-1 (fcitx5-im)
+    Next generation of fcitx
+local/fcitx5-chinese-addons 5.1.9-1
+    Addons related to Chinese, including IME previous bundled inside fcitx4
+local/fcitx5-configtool 5.1.10-1 (fcitx5-im)
+    Configuration Tool for Fcitx5
+local/fcitx5-qt 5.1.10-2 (fcitx5-im)
+    Fcitx5 Qt Library (Qt5 & Qt6 integrations)
 
