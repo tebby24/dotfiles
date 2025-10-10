@@ -2,7 +2,7 @@
 
 # Simple fuzzel power menu for LabWC, with confirmation prompts
 
-chosen=$(printf "logout\nswitch user\nshutdown\nreboot" | fuzzel --dmenu)
+chosen=$(printf "logout\nswitch user\nshutdown\nreboot\nscreen capture (full screen)\nscreen capture (region)" | fuzzel --dmenu)
 
 confirm() {
     action=$1
@@ -17,9 +17,7 @@ case "$chosen" in
     fi
     ;;
   "switch user")
-    if confirm "switch user"; then
-        dm-tool switch-to-greeter
-    fi
+    dm-tool switch-to-greeter
     ;;
   "shutdown")
     if confirm "shut down"; then
@@ -30,6 +28,12 @@ case "$chosen" in
     if confirm "reboot"; then
         systemctl reboot
     fi
+    ;;
+  "screen capture (full screen)")
+    grim -o "$(slurp -o -f '%o')" ~/Downloads/$(date +'%Y-%m-%d-%H%M%S').png
+    ;;
+  "screen capture (region)")
+    grim -g "$(slurp)" ~/Downloads/$(date +'%Y-%m-%d-%H%M%S').png
     ;;
   *)
     exit 0
