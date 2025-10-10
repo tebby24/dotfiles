@@ -7,6 +7,8 @@ vim.opt.expandtab = true
 vim.opt.signcolumn = "yes"
 vim.opt.winborder = "rounded"
 
+vim.opt.clipboard = 'unnamedplus'
+
 vim.opt.swapfile = false
 
 vim.pack.add({
