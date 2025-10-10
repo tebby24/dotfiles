@@ -135,10 +135,10 @@
         </keybind>
 
 
-        <keybind key="W-C-4">
+        <keybind key="W-S-4">
             <action name="Execute" command="grim -g '$(slurp)' ~/Downloads/$(date +'%Y-%m-%d-%H%M%S').png"/>
         </keybind>
-        <keybind key="W-C-5">
+        <keybind key="W-S-5">
             <action name="Execute" command="grim -o $(slurp -o -f '%o') ~/Downloads/$(date +'%Y-%m-%d-%H%M%S').png"/>
         </keybind>
 
