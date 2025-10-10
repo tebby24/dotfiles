@@ -134,14 +134,6 @@
             <action name="Execute" command="sh ~/scripts/shared/powermenu"/>
         </keybind>
 
-
-        <keybind key="W-S-4">
-            <action name="Execute" command="grim -g '$(slurp)' ~/Downloads/$(date +'%Y-%m-%d-%H%M%S').png"/>
-        </keybind>
-        <keybind key="W-S-5">
-            <action name="Execute" command="grim -o $(slurp -o -f '%o') ~/Downloads/$(date +'%Y-%m-%d-%H%M%S').png"/>
-        </keybind>
-
         <keybind key="W-q">
             <action name="Close" />
         </keybind>
