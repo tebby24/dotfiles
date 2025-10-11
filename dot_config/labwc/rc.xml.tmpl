@@ -182,6 +182,14 @@
         <keybind key="W-S-Tab">
             <action name="PreviousWindow" />
         </keybind>
+
+        {{ if eq .chezmoi.use.name "qiyichen" }}
+        <keybind key="A-a">
+            <action name="Execute" command="awoi" />
+        </keybind>
+        {{ end }}
+
+
     </keyboard>
 
     <mouse>
