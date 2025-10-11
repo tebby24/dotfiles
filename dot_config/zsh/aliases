@@ -3,6 +3,7 @@ alias la='ls -A'
 alias l='ls -CF'
 
 alias cm='chezmoi'
+alias lg='lazygit'
 
 alias copy='wl-copy'
 
