@@ -8,3 +8,6 @@ alias lg='lazygit'
 alias copy='wl-copy'
 
 alias printpath='echo "$PATH" | tr ":" "\n"'
+
+alias code='/usr/bin/code --enable-features=UseOzonePlatform --enable-features=WaylandWindowDecorations --ozone-platform-hint=auto'
+
