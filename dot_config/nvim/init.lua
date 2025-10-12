@@ -15,16 +15,17 @@ vim.pack.add({
     { src = "https://github.com/vague2k/vague.nvim" },
     { src = "https://github.com/stevearc/oil.nvim" },
     { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
-    { src = "https://github.com/echasnovski/mini.pick" },
+    { src = "https://github.com/nvim-lua/plenary.nvim" },
+    { src = "https://github.com/nvim-telescope/telescope.nvim", tag = "0.1.x" },
     { src = 'https://github.com/neovim/nvim-lspconfig' },
 })
 
-require "mini.pick".setup()
+require"telescope".setup{}
 require "oil".setup()
 
 local map = vim.keymap.set
-map('n', '<leader>f', ":Pick files<CR>")
-map('n', '<leader>h', ":Pick help<CR>")
+map('n', '<leader>f', ":Telescope find_files<CR>")
+map('n', '<leader>h', ":Telescope help_tags<CR>")
 map('n', '<leader>e', ":Oil<CR>")
 map('n', '<leader>lf', vim.lsp.buf.format)
 
