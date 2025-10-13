@@ -2,7 +2,7 @@ kanshi &
 
 mako &
 
-swaybg -i '~/Pictures/shared/wallpapers/mai-sakurajima.png' -m fill &
+swaybg -i ~/Pictures/shared/wallpapers/mai-sakurajima.png -m fill &
 
 waybar --style "~/.config/waybar/style.css" &
 
