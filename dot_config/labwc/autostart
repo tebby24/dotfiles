@@ -2,10 +2,9 @@ kanshi &
 
 mako &
 
-swaybg -c '#090b1a' &
+swaybg -i '~/Pictures/shared/wallpapers/mai-sakurajima.png' -m fill &
 
-waybar --style ~/.config/waybar/style.css &
-
+waybar --style "~/.config/waybar/style.css" &
 
 fcitx5 -d &
 
