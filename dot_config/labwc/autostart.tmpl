@@ -3,6 +3,9 @@ kanshi &
 mako &
 
 swaybg -i {{ .primary_monitor_wallpaper }} -m fill -o {{ .primary_monitor }} &
+{{- if .secondary_monitor }}
+swaybg -c '#000000' -m fill -o {{ .secondary_monitor }} &
+{{- end }}
 
 waybar --style ~/.config/waybar/style.css &
 
