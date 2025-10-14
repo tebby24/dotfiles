@@ -20,6 +20,15 @@ vim.pack.add({
     { src = 'https://github.com/neovim/nvim-lspconfig' },
 })
 
+
+require('nvim-treesitter.configs').setup {
+    ensure_installed = { "lua", "c", "markdown", "markdown_inline" },
+    highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = false,
+    },
+}
+
 require"telescope".setup{}
 require "oil".setup()
 
