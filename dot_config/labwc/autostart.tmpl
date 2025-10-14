@@ -2,11 +2,7 @@ kanshi &
 
 mako &
 
-swaybg \
-    -o {{ .primary_monitor }} -i {{ .primary_monitor_wallpaper }} -m fill \
-    {{- if .secondary_monitor }} \
-    -o {{ .secondary_monitor }} -c '#000000' -m fill \
-    {{- end }} &
+swaybg -o {{ .primary_monitor }} -i {{ .primary_monitor_wallpaper }} -m fill {{ if .secondary_monitor }} -o {{ .secondary_monitor }} -c '#000000' -m fill{{ end }} &
 
 
 waybar --style ~/.config/waybar/style.css &
