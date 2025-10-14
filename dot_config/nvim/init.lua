@@ -11,7 +11,7 @@ vim.opt.winborder = "rounded"
 vim.opt.clipboard = "unnamedplus"
 vim.opt.swapfile = false
 
--- Bootstrap lazy.nvim if not installed
+-- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -19,7 +19,7 @@ if not vim.loop.fs_stat(lazypath) then
     "clone",
     "--filter=blob:none",
     "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
+    "--branch=stable",
     lazypath,
   })
 end
@@ -32,7 +32,7 @@ require("lazy").setup({
     "vague2k/vague.nvim",
     config = function()
       require("vague").setup({ transparent = true })
-      vim.cmd("colorscheme vague")
+      vim.cmd.colorscheme("vague")
       vim.cmd("hi Normal guibg=NONE")
       vim.cmd("hi StatusLine guibg=NONE")
     end,
@@ -60,7 +60,7 @@ require("lazy").setup({
     end,
   },
 
-  -- Telescope (with dependency)
+  -- Telescope
   {
     "nvim-telescope/telescope.nvim",
     tag = "0.1.x",
@@ -73,15 +73,47 @@ require("lazy").setup({
     end,
   },
 
-  -- LSP Config
+  -- LSP setup using new API
   {
     "neovim/nvim-lspconfig",
     config = function()
-      local lspconfig = require("lspconfig")
-      lspconfig.lua_ls.setup({})
-      lspconfig.clangd.setup({})
-      lspconfig.lemminx.setup({})
-      vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, { desc = "Format file" })
+      local lsp = vim.lsp
+      local configs = lsp.configs
+
+      -- Define servers using new API
+      configs.lua_ls = {
+        default_config = {
+          cmd = { "lua-language-server" },
+          filetypes = { "lua" },
+          root_dir = lsp.util.root_pattern(".git", "."),
+        },
+      }
+
+      configs.clangd = {
+        default_config = {
+          cmd = { "clangd" },
+          filetypes = { "c", "cpp", "objc", "objcpp" },
+          root_dir = lsp.util.root_pattern(".git", "."),
+        },
+      }
+
+      configs.lemminx = {
+        default_config = {
+          cmd = { "lemminx" },
+          filetypes = { "xml", "xsd", "xsl", "xslt" },
+          root_dir = lsp.util.root_pattern(".git", "."),
+        },
+      }
+
+      -- Start servers
+      lsp.start(configs.lua_ls)
+      lsp.start(configs.clangd)
+      lsp.start(configs.lemminx)
+
+      -- Keymaps
+      vim.keymap.set("n", "<leader>lf", function()
+        vim.lsp.buf.format({ async = true })
+      end, { desc = "Format file" })
     end,
   },
 })
