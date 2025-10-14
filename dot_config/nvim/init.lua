@@ -25,6 +25,12 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- Helper: root detection (replaces root_pattern)
+local function root_dir(fname)
+  local root_files = { ".git", ".luarc.json", "compile_commands.json", "Makefile" }
+  return vim.fs.dirname(vim.fs.find(root_files, { upward = true, path = fname })[1]) or vim.loop.cwd()
+end
+
 -- Plugin setup
 require("lazy").setup({
   -- Theme
@@ -73,19 +79,25 @@ require("lazy").setup({
     end,
   },
 
-  -- LSP setup using new API
+  -- LSP (modern API)
   {
     "neovim/nvim-lspconfig",
     config = function()
       local lsp = vim.lsp
       local configs = lsp.configs
 
-      -- Define servers using new API
+      -- Define servers using new vim.lsp.config API
       configs.lua_ls = {
         default_config = {
           cmd = { "lua-language-server" },
           filetypes = { "lua" },
-          root_dir = lsp.util.root_pattern(".git", "."),
+          root_dir = root_dir,
+          settings = {
+            Lua = {
+              diagnostics = { globals = { "vim" } },
+              workspace = { checkThirdParty = false },
+            },
+          },
         },
       }
 
@@ -93,7 +105,7 @@ require("lazy").setup({
         default_config = {
           cmd = { "clangd" },
           filetypes = { "c", "cpp", "objc", "objcpp" },
-          root_dir = lsp.util.root_pattern(".git", "."),
+          root_dir = root_dir,
         },
       }
 
@@ -101,16 +113,16 @@ require("lazy").setup({
         default_config = {
           cmd = { "lemminx" },
           filetypes = { "xml", "xsd", "xsl", "xslt" },
-          root_dir = lsp.util.root_pattern(".git", "."),
+          root_dir = root_dir,
         },
       }
 
-      -- Start servers
+      -- Start LSP servers
       lsp.start(configs.lua_ls)
       lsp.start(configs.clangd)
       lsp.start(configs.lemminx)
 
-      -- Keymaps
+      -- LSP keymaps
       vim.keymap.set("n", "<leader>lf", function()
         vim.lsp.buf.format({ async = true })
       end, { desc = "Format file" })
