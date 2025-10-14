@@ -25,10 +25,11 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Helper: root detection (replaces root_pattern)
+-- Helper for finding project root
 local function root_dir(fname)
   local root_files = { ".git", ".luarc.json", "compile_commands.json", "Makefile" }
-  return vim.fs.dirname(vim.fs.find(root_files, { upward = true, path = fname })[1]) or vim.loop.cwd()
+  local found = vim.fs.find(root_files, { upward = true, path = fname })[1]
+  return found and vim.fs.dirname(found) or vim.loop.cwd()
 end
 
 -- Plugin setup
@@ -73,22 +74,21 @@ require("lazy").setup({
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       require("telescope").setup({})
-      local map = vim.keymap.set
-      map("n", "<leader>f", "<cmd>Telescope find_files<CR>", { desc = "Find files" })
-      map("n", "<leader>h", "<cmd>Telescope help_tags<CR>", { desc = "Help tags" })
+      vim.keymap.set("n", "<leader>f", "<cmd>Telescope find_files<CR>", { desc = "Find files" })
+      vim.keymap.set("n", "<leader>h", "<cmd>Telescope help_tags<CR>", { desc = "Help tags" })
     end,
   },
 
-  -- LSP (modern API)
+  -- LSP (pure Neovim 0.11+ API)
   {
-    "neovim/nvim-lspconfig",
+    "neovim/nvim-lspconfig", -- still provides server defaults, but not required
     config = function()
       local lsp = vim.lsp
-      local configs = lsp.configs
 
-      -- Define servers using new vim.lsp.config API
-      configs.lua_ls = {
-        default_config = {
+      -- Define server configs directly
+      local servers = {
+        {
+          name = "lua_ls",
           cmd = { "lua-language-server" },
           filetypes = { "lua" },
           root_dir = root_dir,
@@ -99,34 +99,37 @@ require("lazy").setup({
             },
           },
         },
-      }
-
-      configs.clangd = {
-        default_config = {
+        {
+          name = "clangd",
           cmd = { "clangd" },
           filetypes = { "c", "cpp", "objc", "objcpp" },
           root_dir = root_dir,
         },
-      }
-
-      configs.lemminx = {
-        default_config = {
+        {
+          name = "lemminx",
           cmd = { "lemminx" },
           filetypes = { "xml", "xsd", "xsl", "xslt" },
           root_dir = root_dir,
         },
       }
 
-      -- Start LSP servers
-      lsp.start(configs.lua_ls)
-      lsp.start(configs.clangd)
-      lsp.start(configs.lemminx)
+      -- Start each server if not already running
+      for _, cfg in ipairs(servers) do
+        if not lsp.get_clients({ name = cfg.name })[1] then
+          lsp.start({
+            name = cfg.name,
+            cmd = cfg.cmd,
+            root_dir = cfg.root_dir(vim.fn.expand("%:p")),
+            filetypes = cfg.filetypes,
+            settings = cfg.settings,
+          })
+        end
+      end
 
-      -- LSP keymaps
+      -- LSP keymap
       vim.keymap.set("n", "<leader>lf", function()
         vim.lsp.buf.format({ async = true })
       end, { desc = "Format file" })
     end,
   },
 })
-
