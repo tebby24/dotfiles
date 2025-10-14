@@ -36,6 +36,7 @@ lspconfig.clangd.setup({})
 lspconfig.lemminx.setup({})
 
 -- Treesitter
+vim.pack.load('nvim-treesitter')
 require('nvim-treesitter.configs').setup {
     ensure_installed = { "lua", "c", "markdown", "markdown_inline" },
     highlight = { enable = true },
