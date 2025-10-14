@@ -20,15 +20,6 @@ vim.pack.add({
     { src = 'https://github.com/neovim/nvim-lspconfig' },
 })
 
-
-require('nvim-treesitter.configs').setup {
-    ensure_installed = { "lua", "c", "markdown", "markdown_inline" },
-    highlight = {
-        enable = true,
-        additional_vim_regex_highlighting = false,
-    },
-}
-
 require"telescope".setup{}
 require "oil".setup()
 
@@ -43,6 +34,12 @@ local lspconfig = require('lspconfig')
 lspconfig.lua_ls.setup({})
 lspconfig.clangd.setup({})
 lspconfig.lemminx.setup({})
+
+-- Treesitter
+require('nvim-treesitter.configs').setup {
+    ensure_installed = { "lua", "c", "markdown", "markdown_inline" },
+    highlight = { enable = true },
+}
 
 -- colorscheme
 require "vague".setup({ transparent = true })
