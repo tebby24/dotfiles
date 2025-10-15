@@ -113,19 +113,6 @@ require("lazy").setup({
         },
       }
 
-      -- Start each server if not already running
-      for _, cfg in ipairs(servers) do
-        if not lsp.get_clients({ name = cfg.name })[1] then
-          lsp.start({
-            name = cfg.name,
-            cmd = cfg.cmd,
-            root_dir = cfg.root_dir(vim.fn.expand("%:p")),
-            filetypes = cfg.filetypes,
-            settings = cfg.settings,
-          })
-        end
-      end
-
       -- LSP keymap
       vim.keymap.set("n", "<leader>lf", function()
         vim.lsp.buf.format({ async = true })
