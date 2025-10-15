@@ -86,23 +86,8 @@ require("lazy").setup({
                 root_markers = { ".git", "Makefile", "compile_commands.json" },
             })
 
-            -- Lua override
-            vim.lsp.config("lua_ls", {
-                settings = {
-                    Lua = {
-                        diagnostics = { globals = { "vim" } },
-                        workspace = { checkThirdParty = false },
-                    },
-                },
-            })
-
-            -- Clang override (if any)
-            vim.lsp.config("clangd", {
-                -- you can add extra commands or settings here
-            })
-
             -- Enable servers
-            vim.lsp.enable({ "lua_ls", "clangd" })
+            vim.lsp.enable({ "lua_ls", "clangd", "marksman" })
         end,
     },
 })
