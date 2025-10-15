@@ -7,7 +7,6 @@ vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.signcolumn = "yes"
-vim.opt.winborder = "rounded"
 vim.opt.clipboard = "unnamedplus"
 vim.opt.swapfile = false
 
@@ -25,14 +24,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Helper for finding project root
-local function root_dir(fname)
-  local root_files = { ".git", ".luarc.json", "compile_commands.json", "Makefile" }
-  local found = vim.fs.find(root_files, { upward = true, path = fname })[1]
-  return found and vim.fs.dirname(found) or vim.loop.cwd()
-end
-
--- Plugin setup
+-- Plugins
 require("lazy").setup({
   -- Theme
   {
@@ -40,8 +32,6 @@ require("lazy").setup({
     config = function()
       require("vague").setup({ transparent = true })
       vim.cmd.colorscheme("vague")
-      vim.cmd("hi Normal guibg=NONE")
-      vim.cmd("hi StatusLine guibg=NONE")
     end,
   },
 
@@ -73,45 +63,31 @@ require("lazy").setup({
     tag = "0.1.8",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
-      require("telescope").setup({})
+      local telescope = require("telescope")
+      telescope.setup({})
       vim.keymap.set("n", "<leader>f", "<cmd>Telescope find_files<CR>", { desc = "Find files" })
       vim.keymap.set("n", "<leader>h", "<cmd>Telescope help_tags<CR>", { desc = "Help tags" })
     end,
   },
 
-  -- LSP (pure Neovim 0.11+ API)
+  -- LSP
   {
-    "neovim/nvim-lspconfig", -- still provides server defaults, but not required
+    "neovim/nvim-lspconfig",
     config = function()
-      local lsp = vim.lsp
+      local lspconfig = require("lspconfig")
 
-      -- Define server configs directly
-      local servers = {
-        {
-          name = "lua_ls",
-          cmd = { "lua-language-server" },
-          filetypes = { "lua" },
-          root_dir = root_dir,
-          settings = {
-            Lua = {
-              diagnostics = { globals = { "vim" } },
-              workspace = { checkThirdParty = false },
-            },
+      -- Lua
+      lspconfig.lua_ls.setup({
+        settings = {
+          Lua = {
+            diagnostics = { globals = { "vim" } },
+            workspace = { checkThirdParty = false },
           },
         },
-        {
-          name = "clangd",
-          cmd = { "clangd" },
-          filetypes = { "c", "cpp", "objc", "objcpp" },
-          root_dir = root_dir,
-        },
-        {
-          name = "lemminx",
-          cmd = { "lemminx" },
-          filetypes = { "xml", "xsd", "xsl", "xslt" },
-          root_dir = root_dir,
-        },
-      }
+      })
+
+      -- C/C++
+      lspconfig.clangd.setup({})
 
       -- LSP keymap
       vim.keymap.set("n", "<leader>lf", function()
@@ -120,3 +96,4 @@ require("lazy").setup({
     end,
   },
 })
+
