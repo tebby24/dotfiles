@@ -13,35 +13,35 @@ confirm() {
 }
 
 case "$chosen" in
-  "logout")
-    if confirm "log out"; then
-        pkill -KILL -u "$USER"
-    fi
-    ;;
-  "switch user")
-    dm-tool switch-to-greeter
-    ;;
-  "shutdown")
-    if confirm "shut down"; then
-        systemctl poweroff
-    fi
-    ;;
-  "reboot")
-    if confirm "reboot"; then
-        systemctl reboot
-    fi
-    ;;
-  "screen capture (full screen)")
-    # Use scrot for X11 screenshots
-    mkdir -p ~/Downloads
-    scrot ~/Downloads/$(date +'%Y-%m-%d-%H%M%S').png
-    ;;
-  "screen capture (region)")
-    mkdir -p ~/Downloads
-    scrot -s ~/Downloads/$(date +'%Y-%m-%d-%H%M%S').png
-    ;;
-  *)
-    exit 0
-    ;;
+    "logout")
+        if confirm "log out"; then
+            pkill -KILL -u "$USER"
+        fi
+        ;;
+    "switch user")
+        dm-tool switch-to-greeter
+        ;;
+    "shutdown")
+        if confirm "shut down"; then
+            systemctl poweroff
+        fi
+        ;;
+    "reboot")
+        if confirm "reboot"; then
+            systemctl reboot
+        fi
+        ;;
+    "screen capture (full screen)")
+        # Use scrot for X11 screenshots
+        mkdir -p ~/Downloads
+        scrot ~/Downloads/$(date +'%Y-%m-%d-%H%M%S').png
+        ;;
+    "screen capture (region)")
+        mkdir -p ~/Downloads
+        scrot -s ~/Downloads/$(date +'%Y-%m-%d-%H%M%S').png
+        ;;
+    *)
+        exit 0
+        ;;
 esac
 
