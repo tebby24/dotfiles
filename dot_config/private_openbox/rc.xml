@@ -34,7 +34,7 @@
             D: omnipresent (on all desktops).
         -->
         <titleLayout>LDC</titleLayout>
-        <keepBorder>yes</keepBorder>
+        <keepBorder>no</keepBorder>
         <animateIconify>yes</animateIconify>
         <font place="ActiveWindow">
             <name>Terminus</name>
