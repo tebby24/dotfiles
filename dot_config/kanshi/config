@@ -15,6 +15,15 @@ profile {
 }
 
 profile {
+    output "DP-5" { 
+        mode 1920x1080@60
+        position 0,0
+        transform normal
+        scale 1.0
+    }
+}
+
+profile {
     output "eDP-1" {
         mode 2560x1440@60
         position 0,0
