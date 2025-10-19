@@ -1,7 +1,8 @@
-export GTK_THEME=Adwaita:dark
+# Breeze Dark global theming
+export GTK_THEME=Breeze:dark
 export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 export QT_QPA_PLATFORMTHEME=qt5ct
-export QT_STYLE_OVERRIDE=Fusion
+export QT_STYLE_OVERRIDE=Breeze
+export QT_QUICK_CONTROLS_STYLE=Breeze
 export XDG_CURRENT_DESKTOP=Openbox
 export XDG_SESSION_TYPE=x11
-export GDK_BACKEND=x11
