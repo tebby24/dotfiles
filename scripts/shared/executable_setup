@@ -12,20 +12,8 @@ if ! command -v yay >/dev/null 2>&1; then
   makepkg -si --noconfirm
 fi
 
-yay -S --needed --noconfirm neovim-nightly-bin
-
 if [[ "$SHELL" != "/usr/bin/zsh" ]]; then
   chsh -s /usr/bin/zsh
 fi
 
 echo "✅ Setup complete"
-
-local/fcitx5 5.1.14-1 (fcitx5-im)
-    Next generation of fcitx
-local/fcitx5-chinese-addons 5.1.9-1
-    Addons related to Chinese, including IME previous bundled inside fcitx4
-local/fcitx5-configtool 5.1.10-1 (fcitx5-im)
-    Configuration Tool for Fcitx5
-local/fcitx5-qt 5.1.10-2 (fcitx5-im)
-    Fcitx5 Qt Library (Qt5 & Qt6 integrations)
-
