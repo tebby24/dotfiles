@@ -4,8 +4,8 @@
 # -----------------------------
 
 # Window geometry
-padding.width: 0
-padding.height: 0
+padding.width: 5
+padding.height: 5
 border.width: 0
 window.client.padding.width: 0
 window.client.padding.height: 0
@@ -15,7 +15,6 @@ window.active.grip.width: 0
 window.active.grip.height: 0
 window.inactive.grip.width: 0
 window.inactive.grip.height: 0
-
 
 # Menu geometry
 menu.border.width: 0
@@ -59,7 +58,7 @@ window.active.button.pressed.bg: Flat Solid
 window.active.button.pressed.bg.color: #131313
 window.active.button.pressed.image.color: #e0e0e0
 window.active.button.hover.bg: Flat Solid
-window.active.button.hover.bg.color: #131313
+window.active.button.hover.bg.color: #5b5b5b
 window.active.button.hover.image.color: #e0e0e0
 window.active.button.disabled.bg: Flat Solid
 window.active.button.disabled.bg.color: #131313
@@ -107,4 +106,3 @@ menu.items.active.bg: Flat Solid
 menu.items.active.bg.color: #5b5b5b
 menu.items.active.text.color: #ffffff
 menu.items.active.disabled.text.color: #5b5b5b
-
