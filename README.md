@@ -3,7 +3,7 @@
 managed by [chezmoi](https://www.chezmoi.io/)
 
 includes configuration for:
-- labwc
+- openbox
 - zsh
 - alacritty
 - tmux
