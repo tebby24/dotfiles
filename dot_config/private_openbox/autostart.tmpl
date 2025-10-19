@@ -1,7 +1,6 @@
 ~/scripts/user/configure-output &
 
-xwallpaper \
-    --output {{ .primary_monitor }} --stretch "{{ .primary_monitor_wallpaper }}" \
-    {{ if .secondary_monitor }}--output {{ .secondary_monitor }} --color "#000000"{{ end }} &
+xwallpaper --output {{ .primary_monitor }} --stretch "{{ .primary_monitor_wallpaper }}"
+
 
 ~/.config/polybar/launch.sh
