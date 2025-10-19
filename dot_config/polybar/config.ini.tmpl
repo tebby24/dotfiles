@@ -96,7 +96,7 @@ label-padding = 2
 
 [module/network]
 type = internal/network
-interface = wlan0
+interface = {{ .network_interface }}
 interval = 3.0
 
 format-connected = <label-connected>
