@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+# Directory where Chrome stores profiles
+chrome_dir="$HOME/.config/google-chrome"
+
+# Find all profiles
+profiles=$(find "$chrome_dir" -maxdepth 1 -type d -name "Profile*" -o -name "Default")
+
+# Build a list: "Visible Name (FolderName)"
+list=""
+for profile in $profiles; do
+    name=$(jq -r '.profile.name // empty' "$profile/Preferences" 2>/dev/null)
+    folder=$(basename "$profile")
+    if [[ -n "$name" ]]; then
+        list+="$name ($folder)\n"
+    else
+        list+="$folder\n"
+    fi
+done
+
+# Let user pick a profile with rofi
+selection=$(echo -e "$list" | rofi -dmenu -i -p "Select Chrome Profile")
+
+# Get the folder name from parentheses
+folder=$(echo "$selection" | sed -E 's/.*\(([^)]+)\).*/\1/')
+
+# Launch Chrome with that profile
+if [[ -n "$folder" ]]; then
+    google-chrome --profile-directory="$folder" --new-window &
+fi
+
