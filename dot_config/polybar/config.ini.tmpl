@@ -128,7 +128,7 @@ click-left = pavucontrol
 
 [module/hostuser]
 type = custom/text
-format =  x1yoga-arch (tebby24)
+format =  {{ .chezmoi.hostname }} ({{ .chezmoi.username }})
 content-foreground = ${colors.light-gray}
 label-padding = 2
 
