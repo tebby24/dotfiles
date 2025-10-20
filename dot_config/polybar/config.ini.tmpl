@@ -22,7 +22,7 @@ line-size = 1
 
 modules-left = workspaces
 modules-center =
-modules-right = disk pulseaudio network battery date time hostuser
+modules-right = disk pulseaudio network battery0 battery1 date time hostuser
 
 ; ------------------------------------------------------------
 ; MODULES
@@ -72,27 +72,33 @@ label-foreground = ${colors.white}
 label-padding = 2
 timezone = America/Indiana/Indianapolis
 
-[module/battery]
+[module/battery0]
 type = internal/battery
 battery = BAT0
-adapter = AC
 full-at = 95
-poll-interval = 30
 format-charging = <label-charging>
 label-charging = %percentage%% 󰂄
-label-charging-foreground = ${colors.white}
 format-discharging = <label-discharging>
-label-discharging = %percentage%% %icon%
-label-discharging-foreground = ${colors.light-gray}
-format-full = <label-full>
-label-full = %percentage%% 
-label-full-foreground = ${colors.white}
+label-discharging = %percentage%% %capacity%
 ramp-capacity-0 = 
 ramp-capacity-1 = 
 ramp-capacity-2 = 
 ramp-capacity-3 = 
 ramp-capacity-4 = 
-label-padding = 2
+
+[module/battery1]
+type = internal/battery
+battery = BAT1
+full-at = 95
+format-charging = <label-charging>
+label-charging = %percentage%% 󰂄
+format-discharging = <label-discharging>
+label-discharging = %percentage%% %capacity%
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
 
 [module/network]
 type = internal/network
