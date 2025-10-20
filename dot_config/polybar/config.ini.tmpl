@@ -60,7 +60,7 @@ interval = 60
 time = %b %d, %Y
 label =  %time%
 label-foreground = ${colors.white}
-label-padding = 2
+label-padding = 1
 timezone = America/Indiana/Indianapolis
 
 [module/time]
@@ -69,7 +69,7 @@ interval = 5
 time = %I:%M %p
 label =  %time%
 label-foreground = ${colors.white}
-label-padding = 2
+label-padding = 1
 timezone = America/Indiana/Indianapolis
 
 [module/battery0]
@@ -120,7 +120,7 @@ label-disconnected = 
 label-connected-foreground = ${colors.white}
 label-disconnected-foreground = ${colors.mid-gray}
 
-label-padding = 2
+label-padding = 1
 click-left = nm-connection-editor
 
 [module/pulseaudio]
@@ -135,12 +135,12 @@ label-muted-foreground = ${colors.mid-gray}
 ramp-volume-0 = 
 ramp-volume-1 = 
 ramp-volume-2 = 
-label-padding = 2
+label-padding = 1
 click-left = pavucontrol
 
 [module/hostuser]
 type = custom/text
 format =  {{ .chezmoi.hostname }} ({{ .chezmoi.username }})
 content-foreground = ${colors.light-gray}
-label-padding = 2
+label-padding = 1
 
