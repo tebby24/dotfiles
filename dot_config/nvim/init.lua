@@ -9,6 +9,8 @@ vim.opt.expandtab = true
 vim.opt.signcolumn = "yes"
 vim.opt.clipboard = "unnamedplus"
 vim.opt.swapfile = false
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -38,10 +40,13 @@ require("lazy").setup({
     -- File explorer
     {
         "stevearc/oil.nvim",
-        opts = {},
+        opts = {
+            default_file_explorer = true,
+        },
         keys = {
             { "<leader>e", "<cmd>Oil<CR>", desc = "Open Oil file explorer" },
         },
+        dependencies = { "nvim-tree/nvim-web-devicons" },
     },
 
     -- Treesitter
