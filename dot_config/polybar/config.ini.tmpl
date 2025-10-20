@@ -93,21 +93,17 @@ ramp-capacity-3 = 
 ramp-capacity-4 = 
 ramp-capacity-framerate = 500
 
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
-animation-charging-3 = 
-animation-charging-4 = 
-animation-charging-framerate = 750
-
 [module/battery1]
 type = internal/battery
 battery = BAT1
 full-at = 95
+poll-interval = 5
+
 format-charging = <label-charging>
 label-charging = %percentage%% 󰂄
-format-discharging = <label-discharging>
-label-discharging = %percentage%% %capacity%
+format-discharging = <label-discharging><ramp-capacity>
+label-discharging = %percentage%%
+
 ramp-capacity-0 = 
 ramp-capacity-1 = 
 ramp-capacity-2 = 
