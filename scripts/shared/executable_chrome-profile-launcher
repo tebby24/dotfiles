@@ -26,6 +26,6 @@ folder=$(echo "$selection" | sed -E 's/.*\(([^)]+)\).*/\1/')
 
 # Launch Chrome with that profile
 if [[ -n "$folder" ]]; then
-    google-chrome --profile-directory="$folder" --new-window &
+    google-chrome-stable --profile-directory="$folder" --new-window &
 fi
 
