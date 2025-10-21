@@ -3,6 +3,7 @@ adobe-source-han-sans-cn-fonts
 alacritty
 chezmoi
 fcitx5-im
+fcitx5-chinese-addons
 fzf
 git
 gnome-keyring
