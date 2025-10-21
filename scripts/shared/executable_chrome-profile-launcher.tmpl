@@ -19,7 +19,7 @@ else
     max_lines=10
     lines=$(( count < max_lines ? count : max_lines ))
 
-    selection=$(printf "%s\n" "${emails[@]}" | rofi -dmenu -i -p "Select Chrome Profile" --lines "$lines")
+    selection=$(printf "%s\n" "${emails[@]}" | rofi -dmenu -i -p "Select Chrome Profile" -l "$lines")
 
     if [[ -n "$selection" ]]; then
         google-chrome-stable --profile-email="$selection" --new-window &
