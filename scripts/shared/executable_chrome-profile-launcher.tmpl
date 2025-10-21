@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # This file is a chezmoi template
-# It uses the chrome_profiles data list defined in chezmoi.yaml.tmpl
+# It uses the chrome_profiles data list defined in chezmoi.toml
 
 emails=({{ range .chrome_profiles }}"{{ . }}" {{ end }})
 
@@ -15,8 +15,11 @@ elif (( count == 1 )); then
     # Only one profile, launch it directly
     google-chrome-stable --profile-email="${emails[0]}" --new-window &
 else
-    # Multiple profiles: use rofi to select
-    selection=$(printf "%s\n" "${emails[@]}" | rofi -dmenu -i -p "Select Chrome Profile")
+    # Multiple profiles: dynamically size rofi menu based on number of profiles
+    max_lines=10
+    lines=$(( count < max_lines ? count : max_lines ))
+
+    selection=$(printf "%s\n" "${emails[@]}" | rofi -dmenu -i -p "Select Chrome Profile" -lines "$lines")
 
     if [[ -n "$selection" ]]; then
         google-chrome-stable --profile-email="$selection" --new-window &
