@@ -1,5 +1,7 @@
 sh ~/scripts/user/configure-output.sh
 
+dunst &
+
 xwallpaper --output {{ .primary_monitor }} --stretch "{{ .primary_monitor_wallpaper }}"
 
 ~/.config/polybar/launch.sh
