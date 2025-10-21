@@ -1,2 +1,3 @@
-#!/usr/bin/env bash
-PACKAGE_LIST = "$HOME/packages.txt"
+#!/bin/bash
+
+cat "$HOME/packages.txt" | xargs sudo pacman -S --needed --noconfirm
