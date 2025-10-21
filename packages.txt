@@ -14,7 +14,6 @@ jq
 keyd
 lightdm
 lightdm-gtk-greeter
-localsend
 lua-language-server
 materia-gtk-theme
 neovim
