@@ -29,6 +29,7 @@ window {
     width: 400px;
     border:           0;  /* removed window border */
     padding:          5;
+    border-radius: 20px;
 }
 
 mainbox {
