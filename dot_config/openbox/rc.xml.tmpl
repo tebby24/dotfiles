@@ -382,9 +382,19 @@
         </keybind>
 
         {{ if eq .chezmoi.username "qiyichen" }}
-        <keybind key="W-w">
+        <keybind key="W-S-w">
             <action name="Execute">
                 <command>~/scripts/user/awoi</command>
+            </action>
+        </keybind>
+        <keybind key="W-S-r">
+            <action name="Execute">
+                <command>sh ~/scripts/shared/audio-recorder.sh -t 60</command>
+            </action>
+        </keybind>
+        <keybind key="W-S-p">
+            <action name="Execute">
+                <command>sh ~/scripts/shared/play-most-recent-recording.sh</command>
             </action>
         </keybind>
         {{ end }}
