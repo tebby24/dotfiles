@@ -42,3 +42,4 @@ xclip
 xwallpaper
 zathura
 zsh
+nvm
