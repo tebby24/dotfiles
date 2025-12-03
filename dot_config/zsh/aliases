@@ -1,10 +1,10 @@
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-
 alias cm='chezmoi'
 alias lg='lazygit'
 
 alias copy='wl-copy'
 
 alias printpath='echo "$PATH" | tr ":" "\n"'
+
+alias rip='yt-dlp -f "mp4"'
+alias ripsubs='yt-dlp --write-subs --all-subs --no-write-auto-subs --skip-download'
+
