@@ -15,15 +15,20 @@ if [[ ! -f "$input" ]]; then
     exit 1
 fi
 
-# Get filename without extension and directory
+# Get directory, base filename, and extension
 dir="$(dirname "$input")"
 base="$(basename "$input")"
 name="${base%.*}"
+ext="${base##*.}"
 
-output="${dir}/${name}_simplified.txt"
+# Handle files with no extension
+if [[ "$name" == "$base" ]]; then
+    output="${dir}/${name}_simplified"
+else
+    output="${dir}/${name}_simplified.${ext}"
+fi
 
 # Convert using OpenCC (Traditional → Simplified)
 opencc -i "$input" -o "$output" -c t2s.json
 
 echo "Converted file saved to: $output"
-
