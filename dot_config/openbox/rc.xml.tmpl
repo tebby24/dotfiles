@@ -363,20 +363,12 @@
         <!-- Window switcher -->
         <keybind key="W-Tab">
             <action name="NextWindow">
+                <dialog>none</dialog>
                 <raise>yes</raise>
                 <linear>yes</linear>
                 <finalactions>
                     <action name="Raise" />
                     <action name="Focus" />
-                </finalactions>
-            </action>
-        </keybind>
-
-        <keybind key="W-S-Tab">
-            <action name="PreviousWindow">
-                <finalactions>
-                    <action name="Focus" />
-                    <action name="Raise" />
                 </finalactions>
             </action>
         </keybind>
