@@ -361,8 +361,21 @@
         </keybind>
 
         <!-- Window switcher -->
-        <keybind key="W-Tab">
+        <keybind key="W-w">
             <action name="NextWindow">
+                <dialog>none</dialog>
+                <raise>yes</raise>
+                <linear>yes</linear>
+                <finalactions>
+                    <action name="Raise" />
+                    <action name="Focus" />
+                </finalactions>
+            </action>
+        </keybind>
+
+
+        <keybind key="W-s">
+            <action name="PreviousWindow">
                 <dialog>none</dialog>
                 <raise>yes</raise>
                 <linear>yes</linear>
