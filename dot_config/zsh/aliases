@@ -1,7 +1,7 @@
 alias cm='chezmoi'
 alias lg='lazygit'
 
-alias empty='rm -rf ./*(D)'
+alias empty='rm -rfI ./*(D)'
 
 alias copy='xclip -selection clipboard'
 
