@@ -3,7 +3,6 @@ source $HOME/.config/zsh/aliases
 source $HOME/.config/zsh/variables
 source $HOME/.config/zsh/path
 
-
 HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
