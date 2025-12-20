@@ -1,13 +1,8 @@
 # source files
 source $HOME/.config/zsh/aliases
 source $HOME/.config/zsh/variables
+source $HOME/.config/zsh/path
 
-# update PATH
-export PATH="$HOME/scripts/user:$PATH"
-export PATH="$HOME/scripts/shared:$PATH"
-
-# Remove duplicates from the PATH 
-export PATH=$(echo $PATH | tr ':' '\n' | awk '!seen[$0]++' | tr '\n' ':')
 
 HISTFILE=~/.histfile
 HISTSIZE=1000
