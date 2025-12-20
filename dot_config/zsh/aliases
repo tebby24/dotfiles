@@ -1,7 +1,7 @@
 alias cm='chezmoi'
 alias lg='lazygit'
 
-alias copy='xclip'
+alias copy='xclip -selection clipboard'
 
 alias printpath='echo "$PATH" | tr ":" "\n"'
 
