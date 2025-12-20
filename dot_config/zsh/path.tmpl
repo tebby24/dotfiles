@@ -1,7 +1,7 @@
 # update PATH
 export PATH="$HOME/scripts/shared:$PATH"
 export PATH="$HOME/scripts/user:$PATH"
-export PATH="$PATH:$HOME/scripts/user/{{ .chezmoi.username }}"
+export PATH="$HOME/scripts/user/{{ .chezmoi.username }}:$PATH"
 
 # Remove duplicates from the PATH 
 export PATH=$(echo $PATH | tr ':' '\n' | awk '!seen[$0]++' | tr '\n' ':')
