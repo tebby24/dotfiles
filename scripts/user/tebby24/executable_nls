@@ -1,0 +1,31 @@
+#!/bin/zsh
+
+# 1. Configuration
+BASE_DIR="$HOME/learning-sessions"
+TIMESTAMP=$(date +%Y%m%d%H%M%S)
+TARGET_DIR="${BASE_DIR}/${TIMESTAMP}_ls"
+# We'll hardcode the name for this specific workflow to keep it simple
+SESSION_NAME="learning-sessions"
+
+# 2. Create the new directory
+mkdir -p "$TARGET_DIR"
+
+# 3. Ensure the tmux session exists
+# If 'has-session' fails, we create it in the background (-d) 
+# starting at the BASE_DIR.
+if ! tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
+    tmux new-session -ds "$SESSION_NAME" -c "$BASE_DIR"
+fi
+
+# 4. Navigate the session to the new directory
+# We send the 'cd' command to the session's first window.
+tmux send-keys -t "$SESSION_NAME" "cd $TARGET_DIR && clear" C-m
+
+# 5. Bring the user to the session
+if [[ -z "$TMUX" ]]; then
+    # We are outside tmux: attach to the session
+    tmux attach -t "$SESSION_NAME"
+else
+    # We are already inside tmux: switch the client to the session
+    tmux switch-client -t "$SESSION_NAME"
+fi
