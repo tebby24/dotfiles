@@ -7,7 +7,7 @@ darker = #131313
 active-bg = #262626
 
 [bar/main]
-monitor = DisplayPort-2
+monitor = {{ .display }}
 bottom = true
 height = 20
 width = 100%
@@ -107,7 +107,7 @@ ramp-capacity-4 = 󰁹
 
 [module/network]
 type = internal/network
-interface = wlan0
+interface = {{ .network_interface }}
 interval = 3.0
 
 format-connected = <label-connected>
@@ -140,7 +140,7 @@ click-right = pavucontrol
 
 [module/hostuser]
 type = custom/text
-format =  ser5pro-arch (tebby24)
+format =  {{ .chezmoi.hostname }} ({{ .chezmoi.username }})
 content-foreground = ${colors.light-gray}
 label-padding = 1
 
