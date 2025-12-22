@@ -45,3 +45,4 @@ nvm
 trash-cli
 7zip
 obsidian
+xf86-input-wacom
