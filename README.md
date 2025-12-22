@@ -8,6 +8,7 @@ includes configuration for:
 - alacritty
 - tmux
 - neovim 
+- rofi
 - fcitx5
 
 setup for use with a single monitor
