@@ -68,3 +68,19 @@ fill in the config using the following template
     apply = true
     command = "nvim"
 ```
+
+### configure output
+this only needs to be done once per machine
+
+create the following file
+```
+sudo touch /usr/local/bin/configure-output
+```
+
+edit the file using the following as an example
+```bash
+#!/usr/bin/env bash
+xrandr --output DisplayPort-2  --mode 1920x1080 --primary --auto
+```
+query the output name using xrandr
+
