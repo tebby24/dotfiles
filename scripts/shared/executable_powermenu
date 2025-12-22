@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# Simple fuzzel power menu for LabWC, with confirmation prompts
+
+chosen=$(printf "logout\nswitch user\nshutdown\nreboot\nscreen capture (full screen)\nscreen capture (region)" | fuzzel --dmenu)
+
+confirm() {
+    action=$1
+    response=$(printf "no\nyes" | fuzzel --dmenu -p "Are you sure you want to $action? ")
+    [ "$response" = "yes" ]
+}
+
+case "$chosen" in
+  "logout")
+    if confirm "log out"; then
+        labwc -e
+    fi
+    ;;
+  "switch user")
+    dm-tool switch-to-greeter
+    ;;
+  "shutdown")
+    if confirm "shut down"; then
+        systemctl poweroff
+    fi
+    ;;
+  "reboot")
+    if confirm "reboot"; then
+        systemctl reboot
+    fi
+    ;;
+  "screen capture (full screen)")
+    scrot -s ~/Downloads/$(date +'%Y-%m-%d-%H%M%S').png
+    ;;
+  "screen capture (region)")
+    scrot ~/Downloads/$(date +'%Y-%m-%d-%H%M%S').png
+    ;;
+  *)
+    exit 0
+    ;;
+esac
+

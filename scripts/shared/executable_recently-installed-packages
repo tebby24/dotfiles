@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Get explicitly installed packages and find their first "installed" entry in the log
+for pkg in $(pacman -Qeq); do
+    # -a treats the log as text even if it has binary-looking characters
+    # -m 1 stops after the first match (the original install date)
+    grep -a -m 1 " installed $pkg " /var/log/pacman.log
+done | sort
