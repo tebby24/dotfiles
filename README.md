@@ -10,6 +10,8 @@ includes configuration for:
 - neovim 
 - fcitx5
 
+setup for use with a single monitor
+
 ## setup a new computer
 ### install relevant packages
 must be performed for __each user__ on the machine
