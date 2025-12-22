@@ -42,3 +42,6 @@ xwallpaper
 zathura
 zsh
 nvm
+trash-cli
+7zip
+obsidian
