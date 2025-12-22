@@ -1,10 +1,10 @@
-sh ~/scripts/user/configure-output.sh
+configure-output
 
 dunst &
 
 fcitx5 &
 
-xwallpaper --output {{ .primary_monitor }} --stretch "{{ .primary_monitor_wallpaper }}"
+xwallpaper --output {{ .primary_monitor }}
 
 ~/.config/polybar/launch.sh
 

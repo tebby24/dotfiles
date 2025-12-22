@@ -12,7 +12,7 @@ includes configuration for:
 
 ## setup a new computer
 ### install relevant packages
-must be performed for each user on the machine
+must be performed for __each user__ on the machine
 ```shell
 sudo pacman -Syu chezmoi git
 ```
@@ -23,8 +23,6 @@ chezmoi init tebby24
 ```shell
 chezmoi apply -v
 ```
-
-## other configuration
 
 ### setup ssh key with github
 this is necessary to push dotfile changes to the remote repo
@@ -44,3 +42,26 @@ title the SSH key: _hostname (username)_
 
 determine your machine's hostname with `cat /etc/hostname`
 
+### write chezmoi config
+create the configuration file
+```shell
+touch ~/.config/chezmoi/chezmoi.toml
+```
+
+fill in the config using the following template
+
+```toml
+[data]
+    display = "my_display" # xrandr
+    wallpaper = "/home/user/path/to/my/wallpaper"
+    network_interface = "wlan0" # ip link show   
+    chrome_profiles = ["enterted@gmail.com", "tvgonyea@iu.edu"]
+
+[git]
+    autoCommit = true
+    autoPush = true
+
+[edit]
+    apply = true
+    command = "nvim"
+```
