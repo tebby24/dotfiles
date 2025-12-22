@@ -1,2 +1,0 @@
-#!/bin/bash
-xsetwacom set "Wacom Intuos S Pen stylus" PressureCurve 80 0 100 20
