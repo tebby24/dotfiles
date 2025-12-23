@@ -9,7 +9,7 @@
     active-foreground:           rgba ( 193, 193, 193, 100 % );
     lightbg:                     rgba ( 117, 117, 117, 100 % );
     selected-active-foreground:  rgba ( 193, 193, 193, 100 % );
-    background:                  rgba ( 12, 12, 12, 100 % );  /* darker background */
+    background:                  rgba ( 0, 0, 0, 100 % );
     bordercolor:                 rgba ( 39, 39, 39, 100 % );
     normal-background:           rgba ( 12, 12, 12, 100 % );
     lightfg:                     rgba ( 138, 138, 138, 100 % );
