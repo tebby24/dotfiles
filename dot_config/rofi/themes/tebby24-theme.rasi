@@ -9,7 +9,7 @@
     urgent-foreground:           rgba ( 255, 255, 255, 100 % );
     active-foreground:           rgba ( 50, 50, 50, 100 % );
     lightbg:                     rgba ( 117, 117, 117, 100 % );
-    selected-active-foreground:  rgba ( 193, 193, 193, 100 % );
+    selected-active-foreground:  rgba ( 50, 50, 50, 100 % );
     background:                  rgba ( 0, 0, 0, 100 % );
     bordercolor:                 rgba ( 39, 39, 39, 100 % );
     normal-background:           rgba ( 0, 0, 0, 100 % );
