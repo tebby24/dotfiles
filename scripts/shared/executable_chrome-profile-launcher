@@ -1,21 +1,19 @@
 #!/usr/bin/env bash
 
-# This file is a chezmoi template
-# It uses the chrome_profiles data list defined in chezmoi.toml
-
-emails=("enterted@gmail.com" "tvgonyea@iu.edu" )
+# Accept emails as arguments
+emails=("$@")
 
 # Count how many emails we have
 count=${#emails[@]}
 
 if (( count == 0 )); then
-    echo "No Chrome profiles configured in chezmoi data."
+    echo "Usage: $0 email1@gmail.com [email2@gmail.com ...]"
     exit 1
 elif (( count == 1 )); then
     # Only one profile, launch it directly
     google-chrome-stable --profile-email="${emails[0]}" --new-window &
 else
-    # Multiple profiles: dynamically size rofi menu based on number of profiles
+    # Multiple profiles: dynamically size rofi menu
     max_lines=10
     lines=$(( count < max_lines ? count : max_lines ))
 
