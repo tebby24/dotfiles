@@ -46,6 +46,7 @@ message {
 }
 
 textbox {
+    font: "Terminess Nerd Font Mono 12";
     text-color: @foreground;
 }
 
