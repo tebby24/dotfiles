@@ -104,9 +104,9 @@ case-indicator {
 }
 
 entry {
-    font: "Terminess Nerd Font Mono 15";
+    font: "Terminess Nerd Font Mono 12";
     spacing:    0;
-    text-color: @normal-foreground;
+    text-color: @white;
 }
 
 inputbar {
