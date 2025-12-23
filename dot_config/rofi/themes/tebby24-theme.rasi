@@ -23,7 +23,6 @@
     background-color:            rgba ( 0, 0, 0, 0 % );
     active-background:           rgba ( 19, 19, 19, 100 % );
     selected-active-background:  rgba ( 57, 57, 57, 100 % );
-    border-radius: 10px;
 }
 
 window {
@@ -32,18 +31,11 @@ window {
     border:           1; 
     border-color:     @white;
     padding:          10;
-    border-radius: 10px;
 }
 
 mainbox {
     border:  0;
     padding: 0;
-}
-
-message {
-    border:       1px solid;          
-    border-color: @foreground;       
-    padding:      1px ;
 }
 
 textbox {
