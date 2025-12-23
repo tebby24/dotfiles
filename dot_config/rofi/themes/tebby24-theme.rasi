@@ -60,38 +60,27 @@ listview {
 
 element {
     border:  0;
-    padding: 0px ;
+    padding: 2px; /* Added slight padding for better bold look */
+    spacing: 5px;
 }
 
+/* 1. Reset text behavior */
 element-text {
     font: "Terminess Nerd Font Mono 12";
-    background-color: inherit;
-    text-color:       @normal-foreground;
+    background-color: transparent;
+    text-color:       inherit; /* This is the secret sauce */
+    vertical-align:   0.5;
 }
 
-element.normal.normal {
-    background-color: @normal-background;
-    text-color:       @normal-foreground;
-}
-
-element.normal.urgent {
-    background-color: @urgent-background;
-    text-color:       @urgent-foreground;
-}
-
-element.normal.active {
-    background-color: @active-background;
-    text-color:       @active-foreground;
-}
-
+/* 2. Unified selection logic */
 element selected {
     background-color: @selected-normal-background;
     text-color:       @selected-normal-foreground;
 }
 
+/* 3. Force the font change on the text child */
 element selected element-text {
     font: "Terminess Nerd Font Mono Bold 12";
-    text-color: inherit;
 }
 
 scrollbar {
