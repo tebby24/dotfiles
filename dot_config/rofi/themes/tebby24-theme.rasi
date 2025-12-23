@@ -59,29 +59,25 @@ listview {
 }
 
 element {
-    border:  0;
-    padding: 2px;
-    spacing: 5px;
-    /* This defines the 'Normal' state so inherit works */
     background-color: @normal-background;
     text-color:       @normal-foreground;
 }
 
 element-text {
-    font: "Terminess Nerd Font Mono Bold 12";
+    font: "Terminess Nerd Font Mono 12";
     background-color: inherit;
     text-color:       inherit;
-    vertical-align:   0.5;
 }
 
+/* This targets the text widget's own selected state */
+element-text selected {
+    font: "Terminess Nerd Font Mono Bold 12";
+    text-color: @selected-normal-foreground;
+}
+
+/* Keep this for the background highlight */
 element selected {
     background-color: @selected-normal-background;
-    text-color:       @selected-normal-foreground;
-}
-
-element selected element-text {
-    font: "Terminess Nerd Font Mono Bold 12";
-    /* No need to set text-color here, it will inherit from element selected */
 }
 
 
