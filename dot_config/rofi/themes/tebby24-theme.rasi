@@ -68,7 +68,7 @@ element {
 }
 
 element-text {
-    font: "Terminess Nerd Font Mono 12";
+    font: "Terminess Nerd Font Mono Bold 12";
     background-color: inherit;
     text-color:       inherit;
     vertical-align:   0.5;
@@ -82,9 +82,10 @@ element selected {
 element selected element-text {
     font: "Terminess Nerd Font Mono Bold 12";
     /* No need to set text-color here, it will inherit from element selected */
+}
 
 
-}scrollbar {
+scrollbar {
     width:        4px ;
     border:       0;
     handle-width: 8px ;
