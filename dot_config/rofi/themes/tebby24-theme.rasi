@@ -1,5 +1,4 @@
 * {
-    font: "Terminess Nerd Font Mono 12";
     selected-normal-foreground:  rgba ( 255, 255, 255, 100 % );
     foreground:                  rgba ( 224, 224, 224, 100 % );
     white:                       rgba ( 255, 255, 255, 100 % );
@@ -47,7 +46,6 @@ message {
 }
 
 textbox {
-    font: "Terminess Nerd Font Mono 12";
     text-color: @foreground;
 }
 
@@ -100,13 +98,6 @@ button.selected {
     text-color:       @selected-normal-foreground;
 }
 
-inputbar {
-    font: "Terminess Nerd Font Mono 15";
-    spacing:    0;
-    text-color: @normal-foreground;
-    padding:    1px ;
-}
-
 case-indicator {
     spacing:    0;
     text-color: @normal-foreground;
@@ -117,12 +108,11 @@ entry {
     text-color: @normal-foreground;
 }
 
-prompt {
+inputbar {
+    font: "Terminess Nerd Font Mono 15";
     spacing:    0;
     text-color: @normal-foreground;
-}
-
-inputbar {
+    padding:    1px ;
     children:   [ prompt,textbox-prompt-colon,entry,case-indicator ];
 }
 
