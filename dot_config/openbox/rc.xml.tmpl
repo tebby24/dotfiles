@@ -243,8 +243,7 @@
                 <command>
                     {{- $script := "~/scripts/shared/chrome-profile-launcher" -}}
                     {{- $profiles := .chrome_profiles | join " " -}}
-                    {{ $script }} {{ $profiles }}
-                </command>
+                    {{ $script }} {{ $profiles }}</command>
             </action>
         </keybind>
         <keybind key="W-e">
