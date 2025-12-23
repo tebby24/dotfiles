@@ -104,7 +104,7 @@ case-indicator {
 }
 
 entry {
-    font: "Terminess Nerd Font Mono 12";
+    font: "Terminess Nerd Font Mono 15";
     spacing:    0;
     text-color: @normal-foreground;
 }
@@ -113,7 +113,6 @@ inputbar {
     spacing:    0;
     text-color: @normal-foreground;
     padding:    1px ;
-    font: "Terminess Nerd Font Mono 12";
 }
 
 prompt {
