@@ -64,7 +64,7 @@ element {
 }
 
 element-text {
-    font: "Terminess Nerd Font Mono Bold 12";
+    font: "Terminess Nerd Font Mono 12";
     background-color: inherit;
     text-color:       @normal-foreground;
 }
