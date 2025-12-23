@@ -104,6 +104,7 @@ case-indicator {
 }
 
 entry {
+    font: "Terminess Nerd Font Mono 12";
     spacing:    0;
     text-color: @normal-foreground;
 }
