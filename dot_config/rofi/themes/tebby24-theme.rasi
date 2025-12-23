@@ -101,6 +101,7 @@ button.selected {
 }
 
 inputbar {
+    font: "Terminess Nerd Font Mono 15";
     spacing:    0;
     text-color: @normal-foreground;
     padding:    1px ;
