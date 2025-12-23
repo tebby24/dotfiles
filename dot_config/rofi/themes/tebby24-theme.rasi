@@ -54,7 +54,7 @@ listview {
 
 element {
     background-color: @normal-background;
-    text-color:       @light-grew;
+    text-color:       @light-gray;
 }
 
 element-text {
