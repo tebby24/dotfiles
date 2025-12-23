@@ -70,30 +70,7 @@ element-text selected {
 
 /* Keep this for the background highlight */
 element selected {
-    background-color: @selected-normal-background;
-}
-
-
-scrollbar {
-    width:        4px ;
-    border:       0;
-    handle-width: 8px ;
-    padding:      0;
-}
-
-mode-switcher {
-    border:       2px solid 0px 0px ;
-    border-color: @separatorcolor;
-}
-
-button.selected {
-    background-color: @selected-normal-background;
-    text-color:       @selected-normal-foreground;
-}
-
-case-indicator {
-    spacing:    0;
-    text-color: @normal-foreground;
+    background-color: @normal-background;
 }
 
 entry {
