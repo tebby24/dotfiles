@@ -1,4 +1,5 @@
 * {
+    font: "Terminess Nerd Font Mono 12";
     selected-normal-foreground:  rgba ( 255, 255, 255, 100 % );
     foreground:                  rgba ( 224, 224, 224, 100 % );
     white:                       rgba ( 255, 255, 255, 100 % );
