@@ -89,7 +89,7 @@ element.selected.normal {
     text-color:       @selected-normal-foreground;
 }
 
-element-text.selected {
+element-text.selected.normal {
     font: "Terminess Nerd Font Mono Bold 12";
 }
 
