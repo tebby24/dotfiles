@@ -64,6 +64,7 @@ element {
 }
 
 element-text {
+    font: "Terminess Nerd Font Mono 12";
     background-color: inherit;
     text-color:       @normal-foreground;
 }
@@ -86,6 +87,10 @@ element.normal.active {
 element.selected.normal {
     background-color: @selected-normal-background;
     text-color:       @selected-normal-foreground;
+}
+
+element-text.selected {
+    
 }
 
 element.selected.urgent {
