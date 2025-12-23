@@ -40,7 +40,7 @@ mainbox {
 }
 
 textbox {
-    text-color: @foreground;
+    text-color: @white;
 }
 
 listview {
@@ -54,13 +54,13 @@ listview {
 
 element {
     background-color: @normal-background;
-    text-color:       @normal-foreground;
+    text-color:       @light-grew;
 }
 
 element-text {
     font: "Terminess Nerd Font Mono 12";
     background-color: inherit;
-    text-color:       inherit;
+    text-color:       @light-gray;
 }
 
 /* This targets the text widget's own selected state */
@@ -82,7 +82,7 @@ entry {
 
 inputbar {
     spacing:    0;
-    text-color: @normal-foreground;
+    text-color: @white;
     padding:    1px ;
 }
 
@@ -90,9 +90,3 @@ prompt {
     enabled: false;
 }
 
-textbox-prompt-colon {
-    expand:     false;
-    str:        "";
-    margin:     0px 0.3em 0em 0em ;
-    text-color: @normal-foreground;
-}
