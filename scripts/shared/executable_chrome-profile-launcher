@@ -1,25 +1,25 @@
 #!/usr/bin/env bash
 
-# Accept emails as arguments
-emails=("$@")
+# Use absolute paths for binaries
+CHROME="/usr/bin/google-chrome-stable"
+ROFI="/usr/bin/rofi"
 
-# Count how many emails we have
+emails=("$@")
 count=${#emails[@]}
 
 if (( count == 0 )); then
-    echo "Usage: $0 email1@gmail.com [email2@gmail.com ...]"
     exit 1
 elif (( count == 1 )); then
-    # Only one profile, launch it directly
-    google-chrome-stable --profile-email="${emails[0]}" --new-window &
+    # Use the absolute path variable here
+    $CHROME --profile-email="${emails[0]}" --new-window &
 else
-    # Multiple profiles: dynamically size rofi menu
     max_lines=10
     lines=$(( count < max_lines ? count : max_lines ))
 
-    selection=$(printf "%s\n" "${emails[@]}" | rofi -dmenu -i -p "Select Chrome Profile" -l "$lines")
+    # Use the absolute path variable here
+    selection=$(printf "%s\n" "${emails[@]}" | $ROFI -dmenu -i -p "Select Chrome Profile" -l "$lines")
 
     if [[ -n "$selection" ]]; then
-        google-chrome-stable --profile-email="$selection" --new-window &
+        $CHROME --profile-email="$selection" --new-window &
     fi
 fi
