@@ -109,11 +109,10 @@ entry {
 }
 
 inputbar {
-    font: "Terminess Nerd Font Mono 15";
     spacing:    0;
     text-color: @normal-foreground;
     padding:    1px ;
-    children:   [ prompt,textbox-prompt-colon,entry,case-indicator ];
+    font: "Terminess Nerd Font Mono 12";
 }
 
 prompt {
