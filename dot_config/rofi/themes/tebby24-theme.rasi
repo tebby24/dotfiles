@@ -141,6 +141,10 @@ inputbar {
     children:   [ prompt,textbox-prompt-colon,entry,case-indicator ];
 }
 
+prompt {
+    enabled: false;
+}
+
 textbox-prompt-colon {
     expand:     false;
     str:        ":";
