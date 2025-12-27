@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# Configuration
+API_KEY="YOUR_GOOGLE_API_KEY_HERE"
+TEMP_IMG="/tmp/ocr_shot.png"
+
+# 1. Capture selected area with scrot
+# We add a tiny sleep to prevent race conditions with the mouse grab
+sleep 0.2 && scrot -s "$TEMP_IMG" || exit 1
+
+# 2. Base64 encode the image for the JSON payload
+BASE64_IMAGE=$(base64 -w 0 "$TEMP_IMG")
+
+# 3. Create JSON request body
+# Using 'TEXT_DETECTION' for standard OCR
+JSON_REQUEST=$(cat <<EOF
+{
+  "requests": [
+    {
+      "image": { "content": "$BASE64_IMAGE" },
+      "features": [ { "type": "TEXT_DETECTION" } ]
+    }
+  ]
+}
+EOF
+)
+
+# 4. Send to Google API and extract text using jq
+RESULT=$(curl -s -X POST \
+    -H "Content-Type: application/json" \
+    --data-binary "$JSON_REQUEST" \
+    "https://vision.googleapis.com/v1/images:annotate?key=${API_KEY}" \
+    | jq -r '.responses[0].fullTextAnnotation.text')
+
+# 5. Output to clipboard and notify
+if [ "$RESULT" != "null" ] && [ -n "$RESULT" ]; then
+    echo -n "$RESULT" | xclip -selection clipboard
+    notify-send "OCR Success" "Chinese text copied to clipboard."
+else
+    notify-send "OCR Failed" "Google could not detect text."
+fi
+
+# Cleanup
+rm "$TEMP_IMG"
