@@ -1,18 +1,23 @@
 #!/bin/bash
 
+# 0. Check if API Key was provided as an argument
+if [ -z "$1" ]; then
+    echo "Usage: $0 <GOOGLE_OCR_API_KEY>"
+    notify-send "OCR Error" "No API Key provided."
+    exit 1
+fi
+
 # Configuration
-API_KEY="{{ .google_ocr_key }}"
+API_KEY="$1"
 TEMP_IMG="/tmp/ocr_shot.png"
 
 # 1. Capture selected area with scrot
-# We add a tiny sleep to prevent race conditions with the mouse grab
 sleep 0.2 && scrot -s "$TEMP_IMG" || exit 1
 
-# 2. Base64 encode the image for the JSON payload
+# 2. Base64 encode the image
 BASE64_IMAGE=$(base64 -w 0 "$TEMP_IMG")
 
 # 3. Create JSON request body
-# Using 'TEXT_DETECTION' for standard OCR
 JSON_REQUEST=$(cat <<EOF
 {
   "requests": [
@@ -35,7 +40,7 @@ RESULT=$(curl -s -X POST \
 # 5. Output to clipboard and notify
 if [ "$RESULT" != "null" ] && [ -n "$RESULT" ]; then
     echo -n "$RESULT" | xclip -selection clipboard
-    notify-send "OCR Success" "Chinese text copied to clipboard."
+    notify-send "OCR Success" "Text copied to clipboard."
 else
     notify-send "OCR Failed" "Google could not detect text."
 fi
