@@ -385,12 +385,14 @@
             </action>
         </keybind>
 
-        {{ if eq .chezmoi.username "qiyichen" }}
         <keybind key="A-c">
           <action name="Execute">
-            <command>~/scripts/qiyichen/scrot-ocr</command>
+            <command>~/scripts/qiyichen/scrot-ocr "{{.google_ocr_key}}"</command>
           </action>
         </keybind>
+
+
+        {{ if eq .chezmoi.username "qiyichen" }}
         {{ end }}
 
 
