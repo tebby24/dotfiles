@@ -40,7 +40,7 @@ RESULT=$(curl -s -X POST \
 # 5. Output to clipboard and notify
 if [ "$RESULT" != "null" ] && [ -n "$RESULT" ]; then
     echo -n "$RESULT" | xclip -selection clipboard
-    notify-send "OCR Success" "Text copied to clipboard."
+    notify-send "OCR Success" "Text copied to clipboard." -t 2000
 else
     notify-send "OCR Failed" "Google could not detect text."
 fi
