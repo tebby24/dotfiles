@@ -93,7 +93,7 @@ require("lazy").setup({
             })
 
             -- Enable servers
-            vim.lsp.enable({ "lua_ls", "clangd", "marksman" })
+            vim.lsp.enable({ "lua_ls", "clangd", "marksman", "pylsp" })
         end,
     },
 })
