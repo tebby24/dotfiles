@@ -55,7 +55,7 @@ require("lazy").setup({
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
         opts = {
-            ensure_installed = { "lua", "c", "markdown", "markdown_inline" },
+            ensure_installed = { "lua", "c", "cpp", "markdown", "markdown_inline", "python" },
             highlight = { enable = true },
         },
         config = function(_, opts)
@@ -87,7 +87,6 @@ require("lazy").setup({
                     local bufopts = { buffer = bufnr }
                     vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
                     vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
-                    -- etc
                 end,
                 root_markers = { ".git", "Makefile", "compile_commands.json" },
             })
