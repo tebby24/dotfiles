@@ -79,20 +79,61 @@ require("lazy").setup({
     -- LSP
     {
         "neovim/nvim-lspconfig",
-        -- you can even make it `lazy = true` since only configurations are needed
         config = function()
-            -- Global defaults
-            vim.lsp.config("*", {
-                on_attach = function(client, bufnr)
-                    local bufopts = { buffer = bufnr }
-                    vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
-                    vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
-                end,
-                root_markers = { ".git", "Makefile", "compile_commands.json" },
+            local lspconfig = require("lspconfig")
+
+            -- 1. Diagnostic Configuration (The "Squiggles")
+            vim.diagnostic.config({
+                virtual_text = {
+                    severity = { min = vim.diagnostic.severity.WARN },
+                    prefix = "■", -- Clean square prefix
+                },
+                signs = true,
+                underline = true,
+                update_in_insert = false, -- Only update when leaving insert mode (less distracting)
+                severity_sort = true,
+                float = {
+                    border = "rounded",
+                    source = "always",
+                    header = "",
+                    prefix = "",
+                },
             })
 
-            -- Enable servers
-            vim.lsp.enable({ "lua_ls", "clangd", "marksman", "pylsp" })
+            -- 2. Global Keybinds for Diagnostics
+            vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Prev Diagnostic" })
+            vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next Diagnostic" })
+            vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
+
+            -- Toggle Diagnostics (Manual switch)
+            vim.keymap.set("n", "<leader>ux", function()
+                if vim.diagnostic.is_enabled() then
+                    vim.diagnostic.enable(false)
+                    print("Diagnostics Off")
+                else
+                    vim.diagnostic.enable(true)
+                    print("Diagnostics On")
+                end
+            end, { desc = "Toggle Diagnostics" })
+
+            -- 3. LSP Server Setup
+            -- Common on_attach function for keymaps
+            local on_attach = function(_, bufnr)
+                local opts = { buffer = bufnr }
+                vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+                vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+                vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+                vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+                vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+            end
+
+            -- Initialize servers
+            local servers = { "lua_ls", "clangd", "marksman", "pylsp" }
+            for _, lsp in ipairs(servers) do
+                lspconfig[lsp].setup({
+                    on_attach = on_attach,
+                })
+            end
         end,
     },
 })
