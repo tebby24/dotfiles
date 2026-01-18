@@ -80,23 +80,32 @@ require("lazy").setup({
     {
         "neovim/nvim-lspconfig",
         config = function()
-            -- 1. Diagnostic UI Configuration
-            -- This remains the standard way to style those squiggles and floats
+            -- 1. Minimalist Diagnostic Configuration
             vim.diagnostic.config({
-                virtual_text = {
-                    severity = { min = vim.diagnostic.severity.WARN },
-                    prefix = "■", 
-                },
-                signs = true,
-                underline = true,
+                virtual_text = false, -- Completely removes text and prefixes from the line
+                signs = true,         -- Keeps icons in the gutter so you know where errors are
+                underline = true,     -- Keeps the "squiggles"
                 update_in_insert = false,
                 severity_sort = true,
-                float = { border = "rounded", source = "always" },
+                float = { 
+                    border = "rounded", 
+                    source = "always",
+                    header = "",
+                    prefix = "",
+                },
             })
 
-            -- 2. New Native-style Configuration
-            -- We apply settings to '*' to set defaults for all servers
+            -- 2. Style the 'Hover' and 'Signature' windows
+            -- This makes 'K' look exactly like your diagnostic float
+            local handlers = {
+                ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
+                ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
+            }
+
+            -- 3. Modern Native-style Configuration
             vim.lsp.config("*", {
+                -- Apply our rounded border handlers to all servers
+                handlers = handlers,
                 on_attach = function(client, bufnr)
                     local opts = { buffer = bufnr }
                     vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
@@ -105,20 +114,18 @@ require("lazy").setup({
                     vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
                     vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
                 end,
-                -- Root markers tell the LSP where your project "starts"
                 root_markers = { ".git", "pyproject.toml", "Makefile", "package.json" },
             })
 
-            -- 3. Enable servers (The new non-deprecated way)
-            -- This replaces the old lspconfig[server].setup({}) loop
+            -- 4. Enable servers
             vim.lsp.enable({ "lua_ls", "clangd", "marksman", "pylsp" })
 
-            -- 4. Global Diagnostic Keymaps
+            -- Global Diagnostic Keymaps
             vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Prev Diagnostic" })
             vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next Diagnostic" })
             vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
 
-            -- Toggle diagnostics keymap
+            -- Toggle diagnostics (for the underlines/signs)
             vim.keymap.set("n", "<leader>ux", function()
                 vim.diagnostic.enable(not vim.diagnostic.is_enabled())
             end, { desc = "Toggle Diagnostics" })
