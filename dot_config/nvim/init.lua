@@ -80,60 +80,48 @@ require("lazy").setup({
     {
         "neovim/nvim-lspconfig",
         config = function()
-            local lspconfig = require("lspconfig")
-
-            -- 1. Diagnostic Configuration (The "Squiggles")
+            -- 1. Diagnostic UI Configuration
+            -- This remains the standard way to style those squiggles and floats
             vim.diagnostic.config({
                 virtual_text = {
                     severity = { min = vim.diagnostic.severity.WARN },
-                    prefix = "■", -- Clean square prefix
+                    prefix = "■", 
                 },
                 signs = true,
                 underline = true,
-                update_in_insert = false, -- Only update when leaving insert mode (less distracting)
+                update_in_insert = false,
                 severity_sort = true,
-                float = {
-                    border = "rounded",
-                    source = "always",
-                    header = "",
-                    prefix = "",
-                },
+                float = { border = "rounded", source = "always" },
             })
 
-            -- 2. Global Keybinds for Diagnostics
+            -- 2. New Native-style Configuration
+            -- We apply settings to '*' to set defaults for all servers
+            vim.lsp.config("*", {
+                on_attach = function(client, bufnr)
+                    local opts = { buffer = bufnr }
+                    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+                    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+                    vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+                    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+                    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+                end,
+                -- Root markers tell the LSP where your project "starts"
+                root_markers = { ".git", "pyproject.toml", "Makefile", "package.json" },
+            })
+
+            -- 3. Enable servers (The new non-deprecated way)
+            -- This replaces the old lspconfig[server].setup({}) loop
+            vim.lsp.enable({ "lua_ls", "clangd", "marksman", "pylsp" })
+
+            -- 4. Global Diagnostic Keymaps
             vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Prev Diagnostic" })
             vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next Diagnostic" })
             vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
 
-            -- Toggle Diagnostics (Manual switch)
+            -- Toggle diagnostics keymap
             vim.keymap.set("n", "<leader>ux", function()
-                if vim.diagnostic.is_enabled() then
-                    vim.diagnostic.enable(false)
-                    print("Diagnostics Off")
-                else
-                    vim.diagnostic.enable(true)
-                    print("Diagnostics On")
-                end
+                vim.diagnostic.enable(not vim.diagnostic.is_enabled())
             end, { desc = "Toggle Diagnostics" })
-
-            -- 3. LSP Server Setup
-            -- Common on_attach function for keymaps
-            local on_attach = function(_, bufnr)
-                local opts = { buffer = bufnr }
-                vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-                vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-                vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-                vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-                vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-            end
-
-            -- Initialize servers
-            local servers = { "lua_ls", "clangd", "marksman", "pylsp" }
-            for _, lsp in ipairs(servers) do
-                lspconfig[lsp].setup({
-                    on_attach = on_attach,
-                })
-            end
         end,
     },
 })
