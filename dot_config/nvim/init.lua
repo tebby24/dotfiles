@@ -76,60 +76,110 @@ require("lazy").setup({
         end,
     },
 
-    -- LSP
+
     {
         "neovim/nvim-lspconfig",
         config = function()
-            -- 1. Global UI Overrides (The "Force" method for Borders)
             local border = "rounded"
 
-            -- This specifically targets the 'hover' and 'signatureHelp' functions globally
-            vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-                vim.lsp.handlers.hover, { border = border }
-            )
-            vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-                vim.lsp.handlers.signature_help, { border = border }
-            )
+            ------------------------------------------------------------------
+            -- UI: borders everywhere
+            ------------------------------------------------------------------
+            vim.lsp.handlers["textDocument/hover"] =
+            vim.lsp.with(vim.lsp.handlers.hover, { border = border })
 
-            -- 2. Minimalist Diagnostic Configuration
+            vim.lsp.handlers["textDocument/signatureHelp"] =
+            vim.lsp.with(vim.lsp.handlers.signature_help, { border = border })
+
             vim.diagnostic.config({
-                virtual_text = false, -- No text at the end of the line
+                virtual_text = false,
                 signs = true,
                 underline = true,
                 update_in_insert = false,
                 severity_sort = true,
-                float = { 
-                    border = border, 
+                float = {
+                    border = border,
                     source = "always",
                     header = "",
                     prefix = "",
                 },
             })
 
-            -- 3. Modern Native-style Configuration
+            ------------------------------------------------------------------
+            -- Global LSP defaults
+            ------------------------------------------------------------------
             vim.lsp.config("*", {
-                on_attach = function(client, bufnr)
+                root_markers = {
+                    ".git",
+                    "pyproject.toml",
+                    "setup.py",
+                    "Makefile",
+                    "package.json",
+                },
+
+                on_attach = function(_, bufnr)
+                    -- Always enable diagnostics for this buffer
+                    vim.diagnostic.enable(true, { bufnr = bufnr })
+
                     local opts = { buffer = bufnr }
+
                     vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-                    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
                     vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
                     vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
                     vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+
+                    -- Force rounded border for hover (reliable fix)
+                    vim.keymap.set("n", "K", function()
+                        vim.lsp.buf.hover({ border = border })
+                    end, opts)
                 end,
-                root_markers = { ".git", "pyproject.toml", "Makefile", "package.json" },
             })
 
-            -- 4. Enable servers
-            vim.lsp.enable({ "lua_ls", "clangd", "marksman", "pylsp" })
+            ------------------------------------------------------------------
+            -- Server-specific config
+            ------------------------------------------------------------------
 
-            -- Keymaps
-            vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Prev Diagnostic" })
-            vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next Diagnostic" })
-            vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
-            vim.keymap.set("n", "<leader>ux", function()
-                vim.diagnostic.enable(not vim.diagnostic.is_enabled())
-            end, { desc = "Toggle Diagnostics" })
+            -- Lua (Neovim runtime awareness)
+            vim.lsp.config("lua_ls", {
+                settings = {
+                    Lua = {
+                        diagnostics = { globals = { "vim" } },
+                        workspace = { checkThirdParty = false },
+                    },
+                },
+            })
+
+            -- Python (pyright)
+            vim.lsp.config("pyright", {
+                settings = {
+                    python = {
+                        analysis = {
+                            typeCheckingMode = "basic", -- or "strict"
+                            autoSearchPaths = true,
+                            useLibraryCodeForTypes = true,
+                        },
+                    },
+                },
+            })
+
+            ------------------------------------------------------------------
+            -- Enable servers
+            ------------------------------------------------------------------
+            vim.lsp.enable({
+                "lua_ls",
+                "clangd",
+                "marksman",
+                "pyright",
+            })
+
+            ------------------------------------------------------------------
+            -- Diagnostic navigation
+            ------------------------------------------------------------------
+            vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
+            vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
+            vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float)
         end,
-    },
+    }
+
 })
 
