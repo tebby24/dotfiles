@@ -1,2 +1,10 @@
 #!/bin/bash
 xsetwacom set "Wacom Intuos S Pen stylus" PressureCurve 80 0 100 20
+xsetwacom set "Wacom Intuos S Pen stylus" Button 2 2
+xsetwacom set "Wacom Intuos S Pen stylus" Button 3 2
+
+
+xsetwacom set "Wacom Intuos S Pad pad" Button 1 "key 1"
+xsetwacom set "Wacom Intuos S Pad pad" Button 2 "key 0"
+xsetwacom set "Wacom Intuos S Pad pad" Button 3 "key 7"
+xsetwacom set "Wacom Intuos S Pad pad" Button 8 "key +ctrl z -ctrl"
