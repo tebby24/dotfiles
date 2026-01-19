@@ -45,6 +45,7 @@ window.active.label.text.color: #ffffff
 
 window.active.button.unpressed.bg: ParentRelative
 window.active.button.unpressed.image.color: #ffffff
+window.active.button.pressed.bg: ParentRelative
 window.active.button.pressed.image.color: #777777
 
 # Inactive windows
