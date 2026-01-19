@@ -38,8 +38,8 @@ window.label.text.justify: Center
 
 # Active window
 window.active.title.bg: Gradient Vertical Raised
-window.active.title.bg.color: #ffffff
-window.active.title.bg.colorTo: #000000
+window.active.title.bg.color: #000000
+window.active.title.bg.colorTo: #ffffff
 window.active.label.bg: ParentRelative
 window.active.label.text.color: #000000
 window.active.handle.bg: Flat Solid
