@@ -51,13 +51,13 @@ window.active.button.pressed.bg: ParentRelative
 window.active.button.pressed.image.color: #777777
 
 # Inactive windows
-window.inactive.active.title.bg: Raised Gradient SplitVertical
-window.inactive.active.title.bg.color: #000000
-window.inactive.active.title.bg.color.splitTo: #111111
-window.inactive.active.title.bg.colorTo: #000000
-window.inactive.active.title.bg.colorTo.splitTo: #111111
-window.inactive.active.label.bg: ParentRelative
-window.inactive.active.label.text.color: #ffffff
+window.inactive.title.bg: Raised Gradient SplitVertical
+window.inactive.title.bg.color: #000000
+window.inactive.title.bg.color.splitTo: #111111
+window.inactive.title.bg.colorTo: #000000
+window.inactive.title.bg.colorTo.splitTo: #111111
+window.inactive.label.bg: ParentRelative
+window.inactive.label.text.color: #ffffff
 
 window.inactive.button.unpressed.bg: Flat Solid
 window.inactive.button.unpressed.bg.color: #171717
