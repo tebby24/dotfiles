@@ -37,8 +37,9 @@ menu.title.text.font: shadow=n
 window.label.text.justify: Center
 
 # Active window
-window.active.title.bg: Flat Solid
+window.active.title.bg: Gradient Vertical Raised
 window.active.title.bg.color: #ffffff
+window.active.title.bg.colorTo: #000000
 window.active.label.bg: ParentRelative
 window.active.label.text.color: #000000
 window.active.handle.bg: Flat Solid
