@@ -53,9 +53,9 @@ window.active.button.pressed.image.color: #777777
 # Inactive windows
 window.inactive.title.bg: Raised Gradient SplitVertical
 window.inactive.title.bg.color: #000000
-window.inactive.title.bg.color.splitTo: #111111
+window.inactive.title.bg.color.splitTo: #222222
 window.inactive.title.bg.colorTo: #000000
-window.inactive.title.bg.colorTo.splitTo: #111111
+window.inactive.title.bg.colorTo.splitTo: #222222
 window.inactive.label.bg: ParentRelative
 window.inactive.label.text.color: #ffffff
 
