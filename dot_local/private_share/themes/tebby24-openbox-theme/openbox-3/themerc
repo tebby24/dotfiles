@@ -38,10 +38,10 @@ window.label.text.justify: Center
 
 # Active window
 window.active.title.bg: Raised Gradient SplitVertical
-window.active.title.bg.color: #444444
-window.active.title.bg.color.splitTo: #000000
-window.active.title.bg.colorTo: #444444
-window.active.title.bg.colorTo.splitTo: #000000
+window.active.title.bg.color: #000000
+window.active.title.bg.color.splitTo: #333333
+window.active.title.bg.colorTo: #000000
+window.active.title.bg.colorTo.splitTo: #333333
 window.active.label.bg: ParentRelative
 window.active.label.text.color: #ffffff
 
