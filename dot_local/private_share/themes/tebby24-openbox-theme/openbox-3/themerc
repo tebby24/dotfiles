@@ -42,12 +42,8 @@ window.active.title.bg.color: #000000
 window.active.title.bg.color: #444444
 window.active.label.bg: ParentRelative
 window.active.label.text.color: #ffffff
-window.active.handle.bg: Flat Solid
-window.active.handle.bg.color: #131313
-window.active.grip.bg: Flat Solid
-window.active.grip.bg.color: #131313
 
-window.active.button.unpressed.bg: Flat Solid
+window.active.button.unpressed.bg: ParentRelative
 window.active.button.unpressed.bg.color: #131313
 window.active.button.unpressed.image.color: #e0e0e0
 window.active.button.pressed.bg: Flat Solid
