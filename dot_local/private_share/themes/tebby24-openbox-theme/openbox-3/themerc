@@ -44,8 +44,7 @@ window.active.label.bg: ParentRelative
 window.active.label.text.color: #ffffff
 
 window.active.button.unpressed.bg: ParentRelative
-window.active.button.unpressed.bg.color: #131313
-window.active.button.unpressed.image.color: #e0e0e0
+window.active.button.unpressed.image.color: #ffffff
 window.active.button.pressed.bg: Flat Solid
 window.active.button.pressed.bg.color: #131313
 window.active.button.pressed.image.color: #e0e0e0
