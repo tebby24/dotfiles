@@ -45,15 +45,7 @@ window.active.label.text.color: #ffffff
 
 window.active.button.unpressed.bg: ParentRelative
 window.active.button.unpressed.image.color: #ffffff
-window.active.button.pressed.bg: Flat Solid
-window.active.button.pressed.bg.color: #131313
-window.active.button.pressed.image.color: #e0e0e0
-window.active.button.hover.bg: Flat Solid
-window.active.button.hover.bg.color: #5b5b5b
-window.active.button.hover.image.color: #e0e0e0
-window.active.button.disabled.bg: Flat Solid
-window.active.button.disabled.bg.color: #131313
-window.active.button.disabled.image.color: #e0e0e0
+window.active.button.pressed.image.color: #777777
 
 # Inactive windows
 window.inactive.title.bg: Flat Solid
