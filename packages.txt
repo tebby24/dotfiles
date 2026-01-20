@@ -47,3 +47,4 @@ trash-cli
 obsidian
 xf86-input-wacom
 picom
+zip
