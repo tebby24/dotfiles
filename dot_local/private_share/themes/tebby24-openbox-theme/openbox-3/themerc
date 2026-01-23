@@ -21,8 +21,8 @@ menu.width.min: 140
 menu.width.max: 200
 
 # Border colors
-window.active.border.color: #87afff
-window.inactive.border.color: #878787
+window.active.border.color: #242538
+window.inactive.border.color: #27272b
 menu.border.color: #212121
 window.active.client.color: #131313
 window.inactive.client.color: #171717
