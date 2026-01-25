@@ -48,3 +48,4 @@ obsidian
 xf86-input-wacom
 picom
 zip
+tree
