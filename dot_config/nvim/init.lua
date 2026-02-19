@@ -77,6 +77,13 @@ require("lazy").setup({
         end,
     },
 
+    {
+        "windwp/nvim-autopairs",
+        event = "InsertEnter",
+        config = function()
+            require("nvim-autopairs").setup({})
+        end,
+    },
 
     {
         "neovim/nvim-lspconfig",
