@@ -9,7 +9,7 @@ xsetwacom set "Wacom Intuos S Pen stylus" Button 2 2
 xsetwacom set "Wacom Intuos S Pen stylus" Button 3 2
 
 # Reversed pad button mapping
-xsetwacom set "Wacom Intuos S Pad pad" Button 8 "key +ctrl z -ctrl"  # was 1
-xsetwacom set "Wacom Intuos S Pad pad" Button 7 "key v"              # was 2
-xsetwacom set "Wacom Intuos S Pad pad" Button 6 "key e"              # was 3
-xsetwacom set "Wacom Intuos S Pad pad" Button 1 "key p"              # was 8
+xsetwacom set "Wacom Intuos S Pad pad" Button 8 "key +ctrl z -ctrl" 
+xsetwacom set "Wacom Intuos S Pad pad" Button 7 "key v"            
+xsetwacom set "Wacom Intuos S Pad pad" Button 6 "key e"           
+xsetwacom set "Wacom Intuos S Pad pad" Button 1 "key p"          
