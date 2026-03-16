@@ -173,12 +173,16 @@ require("lazy").setup({
             ------------------------------------------------------------------
             -- Enable servers
             ------------------------------------------------------------------
+
+            -- this chunk will make LSP's enabled by default
+            --[[
             vim.lsp.enable({
                 "lua_ls",
                 "clangd",
                 "marksman",
                 "pyright",
             })
+            ]]--
 
             ------------------------------------------------------------------
             -- Diagnostic navigation
