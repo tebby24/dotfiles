@@ -22,3 +22,6 @@ source <(fzf --zsh)
 
 # source node version manager
 source /usr/share/nvm/init-nvm.sh
+
+# configure wacom tablet
+configure-wacom-tablet
