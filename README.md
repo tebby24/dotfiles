@@ -55,10 +55,28 @@ fill in the config using the following template
 
 ```toml
 [data]
-    display = "my_display" # xrandr
-    wallpaper = "/home/user/path/to/my/wallpaper"
-    network_interface = "wlan0" # ip link show   
+    displays = [
+        {
+            name = "HDMI-A-0",
+            wallpaper = "/home/tebby24/Pictures/wallpapers/primary.jpg",
+            primary = true,
+            relation = "",
+            relative_to = "",
+            rotate = "normal"
+        },
+        {
+            name = "DisplayPort-0",
+            wallpaper = "/home/tebby24/Pictures/wallpapers/secondary.png",
+            primary = false,
+            relation = "left-of",
+            relative_to = "HDMI-A-0",
+            rotate = "left"
+        }
+    ]
+
+    network_interface = "wlan0"
     chrome_profiles = ["enterted@gmail.com", "tvgonyea@iu.edu"]
+    google_ocr_key = "getitfromthewebsitebruh"
 
 [git]
     autoCommit = true
