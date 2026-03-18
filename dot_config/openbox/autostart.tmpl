@@ -2,12 +2,11 @@ dunst &
 fcitx5 &
 
 # Configure monitors
-xrandr \
-{{- range .displays }}
-    --output {{ .name }} --auto \
-    {{- if .primary }} --primary {{ end }} \
-    {{- if ne .relation "" }} --{{ .relation }} {{ .relative_to }} {{ end }} \
-    {{- if ne .rotate "" }} --rotate {{ .rotate }} {{ end }} \
+xrandr {{- range .displays }} \
+--output {{ .name }} --auto \
+{{- if .primary }} --primary{{ end }} \
+{{- if ne .relation "" }} --{{ .relation }} {{ .relative_to }}{{ end }} \
+{{- if and (ne .rotate "") (ne .rotate "normal") }} --rotate {{ .rotate }}{{ end }} \
 {{- end }}
 
 # Set wallpapers
