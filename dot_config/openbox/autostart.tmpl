@@ -1,7 +1,18 @@
 dunst &
-
 fcitx5 &
 
-xwallpaper --output {{ .display }} --stretch "{{ .wallpaper }}"
+# Configure monitors
+xrandr \
+{{- range .displays }}
+    --output {{ .name }} --auto \
+    {{- if .primary }} --primary {{ end }} \
+    {{- if ne .relation "" }} --{{ .relation }} {{ .relative_to }} {{ end }} \
+    {{- if ne .rotate "" }} --rotate {{ .rotate }} {{ end }} \
+{{- end }}
 
-$HOME/.config/polybar/launch.sh
+# Set wallpapers
+{{- range .displays }}
+xwallpaper --output {{ .name }} --stretch "{{ .wallpaper }}"
+{{- end }}
+
+$HOME/.config/polybar/launch.sh &
