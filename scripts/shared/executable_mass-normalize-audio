@@ -1,0 +1,66 @@
+#!/bin/bash
+
+# Default values
+DAYS=""
+TARGET_DIR=""
+
+# Parse flags
+while [[ "$#" -gt 0 ]]; do
+  case "$1" in
+    -d)
+      DAYS=$2
+      shift 2
+      ;;
+    *)
+      TARGET_DIR=$1
+      shift
+      ;;
+  esac
+done
+
+# Basic validation
+if [ -z "$TARGET_DIR" ]; then
+    echo "Usage: mass-normalize-mp3 [-d <days>] <path/to/directory>"
+    exit 1
+fi
+
+if [ ! -d "$TARGET_DIR" ]; then
+    echo "Error: Directory '$TARGET_DIR' not found."
+    exit 1
+fi
+
+# Setup output directory
+OUT_DIR="$TARGET_DIR/normalized"
+mkdir -p "$OUT_DIR"
+
+# Build the find command
+if [ -n "$DAYS" ]; then
+    echo "Filtering files from the last $DAYS days..."
+    FIND_CMD="find \"$TARGET_DIR\" -maxdepth 1 -iname \"*.mp3\" -mtime -\"$DAYS\" -type f"
+else
+    echo "Processing all MP3 files in: $TARGET_DIR"
+    FIND_CMD="find \"$TARGET_DIR\" -maxdepth 1 -iname \"*.mp3\" -type f"
+fi
+
+# Processing Loop
+eval "$FIND_CMD" | while read -r FILE; do
+    FILENAME=$(basename "$FILE")
+    echo "--- Normalizing: $FILENAME ---"
+
+    # I=-16: Integrated Loudness (Target)
+    # TP=-1.5: True Peak (Prevents clipping)
+    # -q:a 2: High quality Variable Bitrate (~170-210 kbps)
+    # -map_metadata 0: Keeps your Artist/Album tags and Cover Art
+    ffmpeg -i "$FILE" -filter:a "loudnorm=I=-16:TP=-1.5:LRA=11" \
+           -codec:a libmp3lame -q:a 2 -map_metadata 0 \
+           "$OUT_DIR/$FILENAME" -y -hide_banner -loglevel error
+
+    if [ $? -eq 0 ]; then
+        echo "Success: $FILENAME"
+    else
+        echo "Error: Failed to process $FILENAME"
+    fi
+done
+
+echo "------------------------------------------"
+echo "Done! Check the '$OUT_DIR' folder for your files."
