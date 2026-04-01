@@ -52,7 +52,7 @@ require("lazy").setup({
 
             vim.cmd('colorscheme github_dark_default')
         end,
-    }
+    },
 
     -- File explorer
     {
