@@ -32,10 +32,9 @@ require("lazy").setup({
         -- Theme
         {
           "vague-theme/vague.nvim",
-          lazy = false, -- make sure we load this during startup if it is your main colorscheme
-          priority = 1000, -- make sure to load this before all the other plugins
+          lazy = false,
+          priority = 1000
           config = function()
-            -- NOTE: you do not need to call setup if you don't want to.
             require("vague").setup({
                 transparent = true,
             })
@@ -79,7 +78,7 @@ require("lazy").setup({
             telescope.setup({})
             vim.keymap.set("n", "<leader>f", "<cmd>Telescope find_files<CR>", { desc = "Find files" })
             vim.keymap.set("n", "<leader>h", "<cmd>Telescope help_tags<CR>", { desc = "Help tags" })
-            vim.keymap.set("n", "<leader>p", "<cmd>Telescope commands<CR>", { desc = "Help tags" })
+            vim.keymap.set("n", "<leader>p", "<cmd>Telescope commands<CR>", { desc = "Commands" })
         end,
     },
 
