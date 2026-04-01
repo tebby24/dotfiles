@@ -31,14 +31,6 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     -- Theme
     {
-        "vague2k/vague.nvim",
-        config = function()
-            require("vague").setup({ transparent = true })
-            vim.cmd.colorscheme("vague")
-        end,
-    },
-
-    {
         'projekt0n/github-nvim-theme',
         name = 'github-theme',
         lazy = false,
@@ -49,7 +41,6 @@ require("lazy").setup({
                     transparent = true,
                 }
             })
-
             vim.cmd('colorscheme github_dark_default')
         end,
     },
