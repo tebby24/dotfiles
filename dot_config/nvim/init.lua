@@ -13,14 +13,6 @@ vim.opt.swapfile = false
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
--- Make statusline transparent
-vim.api.nvim_set_hl(0, "StatusLine", { bg = "none" })
-vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "none" })
-
-vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
-vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
-
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -45,6 +37,10 @@ require("lazy").setup({
         config = function()
             require("vague").setup({
                 transparent = true,
+                on_highlights = function(hl, c)
+                    hl.StatusLine = { bg = "none" }
+                    hl.StatusLineNC = { bg = "none" }
+                end,
             })
             vim.cmd("colorscheme vague")
         end
