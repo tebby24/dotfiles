@@ -79,9 +79,7 @@ require("lazy").setup({
             telescope.setup({})
             vim.keymap.set("n", "<leader>f", "<cmd>Telescope find_files<CR>", { desc = "Find files" })
             vim.keymap.set("n", "<leader>h", "<cmd>Telescope help_tags<CR>", { desc = "Help tags" })
-
-            local builtin = require('telescope.builtin')
-            vim.keymap.set('n', '<leader>p', builtin.commands, { desc = 'Telescope commands' })
+            vim.keymap.set("n", "<leader>p", "<cmd>Telescope commands<CR>", { desc = "Help tags" })
         end,
     },
 
