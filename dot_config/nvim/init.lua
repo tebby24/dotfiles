@@ -38,6 +38,7 @@ require("lazy").setup({
         config = function()
             require('github-theme').setup({
                 options = {
+                    hide_nc_statusline = true,
                     transparent = true,
                 }
             })
