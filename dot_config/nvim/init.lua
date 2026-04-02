@@ -145,7 +145,6 @@ require("lazy").setup({
                     vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
                     vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 
-                    -- Force rounded border for hover (reliable fix)
                     vim.keymap.set("n", "K", function()
                         vim.lsp.buf.hover({ border = border })
                     end, opts)
@@ -184,14 +183,12 @@ require("lazy").setup({
             ------------------------------------------------------------------
 
             -- this chunk will make LSP's enabled by default
-            --[[
             vim.lsp.enable({
                 "lua_ls",
                 "clangd",
                 "marksman",
                 "pyright",
             })
-            ]]--
 
             ------------------------------------------------------------------
             -- Diagnostic navigation
