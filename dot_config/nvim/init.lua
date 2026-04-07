@@ -10,27 +10,6 @@ vim.o.winborder = "rounded"
 vim.opt.signcolumn = "yes"
 vim.opt.clipboard = "unnamedplus"
 vim.opt.swapfile = false
-<<<<<<< HEAD
-vim.opt.ignorecase = true
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
-vim.opt.virtualedit = "block"
-
--- Bootstrap lazy.nvim
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-    vim.fn.system({
-        "git",
-        "clone",
-        "--filter=blob:none",
-        "https://github.com/folke/lazy.nvim.git",
-        "--branch=stable",
-        lazypath,
-    })
-end
-vim.opt.rtp:prepend(lazypath)
-=======
 
 -- Disable netrw early so Oil can take over file browsing
 vim.g.loaded_netrw = 1
@@ -47,7 +26,6 @@ vim.pack.add({
     { src = "https://github.com/nvim-lua/plenary.nvim" },
     { src = "https://github.com/windwp/nvim-autopairs" },
 }, { load = true })
->>>>>>> a989522 (Update .config/nvim/init.lua)
 
 -- Keep Treesitter parser updates roughly equivalent to lazy.nvim's :TSUpdate hook
 vim.api.nvim_create_autocmd("PackChanged", {
@@ -193,4 +171,3 @@ do
         desc = "Line diagnostics",
     })
 end
-
