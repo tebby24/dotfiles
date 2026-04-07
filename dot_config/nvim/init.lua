@@ -16,7 +16,7 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 -- Built-in plugin manager (Neovim 0.12+)
--- load = true is important in init.lua so plugins are available immediately.
+-- load = true matters here because init.lua runs before the usual auto-load step.
 vim.pack.add({
     { src = "https://github.com/vague-theme/vague.nvim" },
     { src = "https://github.com/stevearc/oil.nvim" },
@@ -26,22 +26,6 @@ vim.pack.add({
     { src = "https://github.com/nvim-lua/plenary.nvim" },
     { src = "https://github.com/windwp/nvim-autopairs" },
 }, { load = true })
-
--- Keep Treesitter parser updates roughly equivalent to lazy.nvim's :TSUpdate hook
-vim.api.nvim_create_autocmd("PackChanged", {
-    callback = function(ev)
-        local spec = ev.data.spec
-        if not spec then
-            return
-        end
-
-        if spec.name == "nvim-treesitter" and (ev.data.kind == "install" or ev.data.kind == "update") then
-            vim.schedule(function()
-                pcall(vim.cmd, "TSUpdate")
-            end)
-        end
-    end,
-})
 
 -- Theme
 require("vague").setup({
@@ -62,11 +46,20 @@ vim.keymap.set("n", "<leader>e", "<cmd>Oil<CR>", {
     desc = "Open Oil file explorer",
 })
 
--- Treesitter
-require("nvim-treesitter.configs").setup({
-    ensure_installed = { "lua", "c", "cpp", "markdown", "markdown_inline", "python" },
-    highlight = { enable = true },
+-- Treesitter (new API)
+require("nvim-treesitter").setup({
+    install_dir = vim.fn.stdpath("data") .. "/site",
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+    callback = function(args)
+        vim.treesitter.start(args.buf)
+    end,
+})
+
+-- Optional: if you want parser installs from the config, use the new API.
+-- Uncomment and adjust as needed:
+-- require("nvim-treesitter").install({ "lua", "c", "cpp", "markdown", "markdown_inline", "python" })
 
 -- Telescope
 require("telescope").setup({})
