@@ -3,24 +3,23 @@ vim.g.mapleader = " "
 
 -- Basic options
 vim.opt.number = true
+vim.opt.relativenumber = true
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
-vim.o.winborder = "rounded"
 vim.opt.signcolumn = "yes"
 vim.opt.clipboard = "unnamedplus"
 vim.opt.swapfile = false
+vim.o.winborder = "rounded"
 
--- Disable netrw early so Oil can take over file browsing
+-- Disable netrw so Oil can take over file browsing
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 -- Built-in plugin manager (Neovim 0.12+)
--- load = true matters here because init.lua runs before the usual auto-load step.
 vim.pack.add({
     { src = "https://github.com/vague-theme/vague.nvim" },
     { src = "https://github.com/stevearc/oil.nvim" },
-    { src = "https://github.com/nvim-tree/nvim-web-devicons" },
     { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
     { src = "https://github.com/nvim-telescope/telescope.nvim", version = "0.1.8" },
     { src = "https://github.com/nvim-lua/plenary.nvim" },
@@ -35,7 +34,7 @@ require("vague").setup({
         hl.StatusLineNC = { bg = "none" }
     end,
 })
-vim.cmd("colorscheme vague")
+vim.cmd.colorscheme("vague")
 
 -- File explorer
 require("oil").setup({
@@ -46,20 +45,17 @@ vim.keymap.set("n", "<leader>e", "<cmd>Oil<CR>", {
     desc = "Open Oil file explorer",
 })
 
--- Treesitter (new API)
+-- Treesitter
+-- Keep nvim-treesitter for parsers/queries, but let Neovim handle highlighting.
 require("nvim-treesitter").setup({
     install_dir = vim.fn.stdpath("data") .. "/site",
 })
 
 vim.api.nvim_create_autocmd("FileType", {
     callback = function(args)
-        vim.treesitter.start(args.buf)
+        pcall(vim.treesitter.start, args.buf)
     end,
 })
-
--- Optional: if you want parser installs from the config, use the new API.
--- Uncomment and adjust as needed:
--- require("nvim-treesitter").install({ "lua", "c", "cpp", "markdown", "markdown_inline", "python" })
 
 -- Telescope
 require("telescope").setup({})
@@ -95,7 +91,7 @@ do
         },
     })
 
-    -- Global LSP defaults
+    -- Global defaults for all LSP servers
     vim.lsp.config("*", {
         root_markers = {
             ".git",
@@ -164,3 +160,10 @@ do
         desc = "Line diagnostics",
     })
 end
+
+-- Yank highlight
+vim.api.nvim_create_autocmd("TextYankPost", {
+    callback = function()
+        vim.highlight.on_yank()
+    end,
+})
