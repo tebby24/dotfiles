@@ -52,9 +52,7 @@ vim.cmd('syntax off')
 
 -- Treesitter
 -- Keep nvim-treesitter for parsers/queries, but let Neovim handle highlighting.
-require("nvim-treesitter").setup({
-    install_dir = vim.fn.stdpath("data") .. "/site",
-})
+require("nvim-treesitter").setup({})
 
 vim.api.nvim_create_autocmd("FileType", {
     callback = function(args)
