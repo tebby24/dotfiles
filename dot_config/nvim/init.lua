@@ -47,7 +47,7 @@ vim.keymap.set("n", "<leader>e", "<cmd>Oil<CR>", {
 
 
 -- Only highlight with treesitter
-vim.cmd('syntax off')
+-- vim.cmd('syntax off')
 
 
 -- Treesitter
