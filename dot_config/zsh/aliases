@@ -1,8 +1,6 @@
 alias cm='chezmoi'
 alias lg='lazygit'
 
-alias empty='trash ./*(D)'
-
 alias copy='xclip -selection clipboard'
 
 alias printpath='echo "$PATH" | tr ":" "\n"'
