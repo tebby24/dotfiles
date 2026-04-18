@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Get the current working directory
+TARGET_DIR="$PWD"
+
+# Find all files and directories to trash
+files=$(find "$TARGET_DIR" -mindepth 1 -print)
+relative_files=$(find "$TARGET_DIR" -mindepth 1 -printf "%P\n")
+
+# Check if there are any files to trash
+if [ -z "$files" ]; then
+    echo "No files to trash."
+    exit 0
+fi
+
+# Prompt for confirmation with the list of relative file paths
+echo "Are you sure you want to trash the following files? (y/n)"
+echo "$relative_files"
+read -n 1 -r
+echo  # Move to a new line
+
+# Check the response
+if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+    echo "Operation cancelled."
+    exit 0
+fi
+
+# Recursively trash (move to trash) the files using absolute paths
+echo "$files" | xargs trash-put
