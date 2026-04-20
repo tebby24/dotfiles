@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Configuration
+PROJECT_DIR="/home/qiyichen/tools/tebbydeck"
+PYTHON_EXEC="$PROJECT_DIR/.venv/bin/python"
+MAIN_SCRIPT="$PROJECT_DIR/main.py"
+
+# Use Rofi to get user input
+# -dmenu: makes rofi act like an input/selection tool
+# -p: sets the prompt text
+USER_INPUT=$(rofi -dmenu -p "tebbydeck input:")
+
+# Only execute if the user didn't hit Esc (which leaves USER_INPUT empty)
+if [ -n "$USER_INPUT" ]; then
+    $PYTHON_EXEC $MAIN_SCRIPT "$USER_INPUT"
+fi
