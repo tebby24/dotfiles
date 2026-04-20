@@ -1,9 +1,10 @@
 alias cm='chezmoi'
-alias lg='lazygit'
 
 alias copy='xclip -selection clipboard'
 
 alias printpath='echo "$PATH" | tr ":" "\n"'
+
+alias ll='ls -lha --color=auto --group-directories-first'
 
 alias rip='yt-dlp -f "mp4"'
 alias ripsubs='yt-dlp --write-subs --all-subs --no-write-auto-subs --skip-download'
