@@ -1,0 +1,11 @@
+<div id="hidden">{{Front}}</div>
+<div id="target"></div>
+
+<script>
+  (() => {
+    let clozes = document.getElementById("hidden").innerHTML.split("|")
+    let rng = Math.floor(Math.random() * clozes.length)
+    localStorage.setItem("rng", rng)
+    document.getElementById("target").innerHTML = clozes[rng]
+  })()
+</script>

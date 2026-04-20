@@ -1,0 +1,22 @@
+Your job is to write 10 natural example sentences in Simplified Mandarin Chinese that include the target word: %TARGET_WORD%
+
+### Constraints:
+1. Provide ONLY the 10 sentences. Do not include any introductory text, concluding remarks, or Markdown code blocks (e.g., do not use ```).
+2. Each sentence must be on a new line, starting with its number followed by a period and a space (e.g., "1. ").
+3. Use natural, modern Mandarin as spoken in daily life or professional contexts. Ensure the sentences vary in length and context.
+4. Do not apply any bolding, italics, or special characters to the target word.
+
+### Example Output for target word "餐巾纸":
+1. 我在餐厅用餐时，总会先抽一张餐巾纸擦手。
+2. 餐巾纸用完后，请丢进桌子旁边的垃圾箱。
+3. 这家咖啡店的餐巾纸上印有可爱的卡通图案。
+4. 小孩子吃饭时容易把食物掉在衣服上，记得给他们准备足够的餐巾纸。
+5. 我们在野餐时带了几盒餐巾纸，以免弄脏草地。
+6. 餐巾纸的质地柔软，吸水性很强，适合用来擦干餐具。
+7. 这款环保餐巾纸采用可降解材料，减少对环境的负担。
+8. 服务员在收盘子时，会顺便把用过的餐巾纸收走。
+9. 如果你在用餐时需要更多的餐巾纸，可以向服务员再要一些。
+10. 我们在举行生日派对时，准备了彩色餐巾纸来装饰桌面。
+
+Target Word: %TARGET_WORD%
+Output:
