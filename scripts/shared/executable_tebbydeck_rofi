@@ -6,11 +6,17 @@ PYTHON_EXEC="$PROJECT_DIR/.venv/bin/python"
 MAIN_SCRIPT="$PROJECT_DIR/main.py"
 
 # Use Rofi to get user input
-# -dmenu: makes rofi act like an input/selection tool
-# -p: sets the prompt text
 USER_INPUT=$(rofi -dmenu -p "tebbydeck input:")
 
-# Only execute if the user didn't hit Esc (which leaves USER_INPUT empty)
+# Only execute if the user didn't hit Esc
 if [ -n "$USER_INPUT" ]; then
+    # Run the script
     $PYTHON_EXEC $MAIN_SCRIPT "$USER_INPUT"
+
+    # Check the exit status of the Python script ($? captures the last exit code)
+    if [ $? -eq 0 ]; then
+        notify-send -a "Tebbydeck" "Success" "\"$USER_INPUT\" was added successfully." --icon=emblem-success
+    else
+        notify-send -a "Tebbydeck" "Error" "Failed to add \"$USER_INPUT\"." --icon=dialog-error -u critical
+    fi
 fi
