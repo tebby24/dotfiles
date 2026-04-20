@@ -1,0 +1,121 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+TARGET_WORD=""
+MODEL="deepseek/deepseek-v3.2"
+
+notify_user() {
+  local message="$1"
+  if command -v notify-send >/dev/null 2>&1; then
+    notify-send "$message" || true
+  fi
+}
+
+on_error() {
+  notify_user "Error while adding ${TARGET_WORD:-target word}"
+}
+
+trap on_error ERR
+
+source ~/.config/secrets/openrouter.env
+
+DEBUG=1
+debug() {
+  if [ "$DEBUG" = "1" ]; then
+    echo "[DEBUG] $*" >&2
+  fi
+}
+
+preview_multiline() {
+  local value="$1"
+  printf '%s' "$value" | head -n 6 >&2
+}
+
+debug "Script started"
+debug "Arg count: $#"
+if [ $# -gt 0 ]; then
+  debug "Arg[1]: $1"
+fi
+
+# 1. Get target word from first CLI argument, fallback to selected text
+if [ $# -gt 0 ]; then
+  TARGET_WORD="$1"
+  debug "Using CLI argument as target word"
+else
+  SELECTED_TEXT=$(xclip -o -selection primary 2>/dev/null || true)
+  debug "Selected text length: ${#SELECTED_TEXT}"
+  if [ -n "$SELECTED_TEXT" ]; then
+    debug "Selected text: $SELECTED_TEXT"
+    TARGET_WORD="$SELECTED_TEXT"
+    debug "Using selected text as target word"
+  else
+    debug "No selected text found from xclip primary selection"
+  fi
+fi
+
+if [ -z "$TARGET_WORD" ]; then
+  echo "Error: no selected text and no target word argument provided." >&2
+  exit 1
+fi
+debug "Final target word: $TARGET_WORD"
+
+# 2. Load and format prompt
+PROMPT_TEMPLATE=$(cat /home/qiyichen/.config/addankinote/prompt.txt)
+debug "Loaded prompt template from /home/qiyichen/.config/addankinote/prompt.txt"
+debug "Prompt template length: ${#PROMPT_TEMPLATE}"
+debug "Prompt template preview (first up to 6 lines):"
+preview_multiline "$PROMPT_TEMPLATE"
+
+# Replace %TARGET_WORD% with selected text
+PROMPT=${PROMPT_TEMPLATE//%TARGET_WORD%/$TARGET_WORD}
+debug "Prompt length after replacement: ${#PROMPT}"
+debug "Prompt contains placeholder after replacement?"
+if printf '%s' "$PROMPT" | grep -q '%TARGET_WORD%'; then
+  debug "YES (replacement likely failed)"
+else
+  debug "NO (replacement succeeded)"
+fi
+debug "Prompt preview (first up to 6 lines):"
+preview_multiline "$PROMPT"
+
+# 3. Call OpenRouter
+debug "Calling OpenRouter API with model $MODEL"
+RESPONSE=$(curl -s https://openrouter.ai/api/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $OPENROUTER_API_KEY" \
+  -d "$(jq -n \
+    --arg model "$MODEL" \
+    --arg prompt "$PROMPT" \
+    '{
+      model: $model,
+      messages: [
+        { role: "user", content: $prompt }
+      ]
+    }'
+  )" \
+  | jq -r '.choices[0].message.content')
+debug "Received API response content length: ${#RESPONSE}"
+debug "Response preview (first up to 6 lines):"
+preview_multiline "$RESPONSE"
+
+# 4. Format response
+# - remove numbering like "1. "
+# - trim whitespace
+# - join with " | "
+
+FORMATTED=$(printf '%s\n' "$RESPONSE" \
+  | sed -E 's/^[[:space:]]*[0-9]+[.)][[:space:]]*//' \
+  | sed -E 's/[[:space:]]+$//' \
+  | awk 'NF { if (out != "") out = out " | " $0; else out = $0 } END { print out }')
+debug "Formatted result length: ${#FORMATTED}"
+debug "Formatted result: $FORMATTED"
+
+# 5. Pass to your script
+debug "Calling addankinote.py"
+debug "Back value: $TARGET_WORD"
+python3 /home/qiyichen/tools/addankinote/addankinote.py \
+  --config "/home/qiyichen/.config/addankinote/config.toml" \
+  Front="$FORMATTED" \
+  Back="$TARGET_WORD"
+notify_user "$TARGET_WORD successfully added"
+debug "Script finished successfully"
