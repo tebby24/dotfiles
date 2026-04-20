@@ -271,6 +271,8 @@
             </action>
         </keybind>
 
+
+
         <!-- Close focused window -->
         <keybind key="W-C-q">
             <action name="Close" />
@@ -393,6 +395,11 @@
 
 
         {{ if eq .chezmoi.username "qiyichen" }}
+        <keybind key="W-m">
+            <action name="Execute">
+                <command>sh ~/scripts/shared/tebbydeck_rofi</command>
+            </action>
+        </keybind>
         {{ end }}
 
 
