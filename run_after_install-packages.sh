@@ -1,22 +1,17 @@
 #!/bin/bash
 set -e
 
-# Path to package list
 PKG_FILE="$HOME/packages.txt"
 
-# Find packages that are not yet installed
-missing=()
-while read -r pkg; do
-    [[ -z "$pkg" || "$pkg" =~ ^# ]] && continue  # skip empty lines and comments
-    if ! pacman -Q "$pkg" &>/dev/null; then
-        missing+=("$pkg")
-    fi
-done < "$PKG_FILE"
+# Strip comments and empty lines, then pass to pacman -T
+mapfile -t candidates < <(grep -vE '^\s*(#|$)' "$PKG_FILE")
 
-# Only call sudo if something is actually missing
+# pacman -T returns the list of missing packages
+missing=($(pacman -T "${candidates[@]}"))
+
 if (( ${#missing[@]} > 0 )); then
-    echo "Installing missing packages: ${missing[*]}"
+    echo "Installing missing: ${missing[*]}"
     sudo pacman -S --needed --noconfirm "${missing[@]}"
 else
-    echo "All packages already installed."
+    echo "All packages and groups are satisfied."
 fi
