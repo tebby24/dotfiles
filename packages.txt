@@ -1,5 +1,8 @@
 openbox
-i3
+i3-wm
+i3status
+i3lock
+i3blocks
 adobe-source-han-sans-cn-fonts
 alacritty
 chezmoi
