@@ -1,4 +1,5 @@
 openbox
+i3
 adobe-source-han-sans-cn-fonts
 alacritty
 chezmoi
