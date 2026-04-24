@@ -1,0 +1,6 @@
+# Copy this file to your own path and edit values for your machine.
+
+[words]
+# Absolute path is recommended.
+file = "/home/qiyichen/Documents/chinese/words_of_interest.txt"
+
