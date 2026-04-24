@@ -1,2 +1,6 @@
 @theme "tebby24-theme"
 
+configuration {
+    modes: [window,drun,run,ssh,windowcd];
+}
+
