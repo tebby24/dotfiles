@@ -4,3 +4,8 @@
 # Absolute path is recommended.
 file = "/home/qiyichen/Documents/chinese/words_of_interest.txt"
 
+[env]
+# Optional path to a machine-local env file with secrets.
+# Example file content:
+# GOOGLETTS_API_KEY="your-key"
+file = "/home/qiyichen/.config/secrets/chinese-tools.env"
