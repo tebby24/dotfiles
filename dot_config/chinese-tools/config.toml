@@ -9,3 +9,13 @@ file = "/home/qiyichen/Documents/chinese/words_of_interest.txt"
 # Example file content:
 # GOOGLETTS_API_KEY="your-key"
 file = "/home/qiyichen/.config/secrets/chinese-tools.env"
+
+[ankiconnect]
+# Local AnkiConnect endpoint.
+endpoint = "http://127.0.0.1:8765"
+api_version = 6
+
+[deck]
+# Destination deck and note type used by `chinese-tools anki add-note`.
+deck_name = "tebbydeck"
+note_type = "tebbycard"
