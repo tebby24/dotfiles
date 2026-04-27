@@ -1,0 +1,7 @@
+#!/bin/bash
+
+WORD=$(selection-else-clipboard)
+
+chinese-tools add-word "$WORD"
+
+notify-send -t 4000 "word added: $WORD"
