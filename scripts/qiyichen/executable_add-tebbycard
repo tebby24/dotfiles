@@ -4,7 +4,7 @@ set -Eeuo pipefail
 TARGET_WORD=$1
 PROMPT_FILE="$HOME/.config/chinese-tools/prompt.txt"
 PROMPT=$(envsubst < "$PROMPT_FILE")
-echo("$PROMPT")
+echo "$PROMPT"
 
 SENTENCES=$(chinese-tools llm "$PROMPT")
 chinese-tools anki add-note Front="$SENTENCES" Back="$TARGET_WORD"
