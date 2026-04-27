@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+ADD_SCRIPT="$HOME/scripts/qiyichen/add-tebbycard"
+
+# Get word list safely
+chinese-tools wordbank list-words | while IFS= read -r word; do
+    # Skip empty lines just in case
+    [[ -z "$word" ]] && continue
+
+    echo "Processing: $word"
+
+    # Call your existing script
+    "$ADD_SCRIPT" "$word"
+
+    # Only remove if the add succeeded
+    chinese-tools wordbank remove-word "$word"
+
+    echo "Finished: $word"
+done
