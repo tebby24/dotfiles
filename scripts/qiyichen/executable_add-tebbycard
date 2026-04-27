@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
-TARGET_WORD=$1
+export TARGET_WORD=$1
 PROMPT_FILE="$HOME/.config/chinese-tools/prompt.txt"
 PROMPT=$(envsubst < "$PROMPT_FILE")
 echo "$PROMPT"
