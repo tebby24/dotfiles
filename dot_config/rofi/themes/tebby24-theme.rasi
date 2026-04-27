@@ -88,6 +88,6 @@ inputbar {
 }
 
 prompt {
-    enabled: false;
+    enabled: true;
 }
 
