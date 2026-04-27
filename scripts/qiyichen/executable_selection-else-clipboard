@@ -2,16 +2,10 @@
 set -euo pipefail
 set -x
 
-echo "[selection] trying primary"
 TEXT=$(xclip -o -selection primary)
 
-echo "[selection] primary='$TEXT'"
-
 if [ -z "$TEXT" ]; then
-    echo "[selection] falling back to clipboard"
     TEXT=$(xclip -o -selection clipboard)
 fi
-
-echo "[selection] final='$TEXT'"
 
 echo "$TEXT"
