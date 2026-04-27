@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 # 1. Try to get the highlighted (primary) text
 TEXT=$(xclip -o -selection primary 2>/dev/null)
