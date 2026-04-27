@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# 1. Try to get the highlighted (primary) text
+TEXT=$(xclip -o -selection primary 2>/dev/null)
+
+# 2. If the primary selection is empty, get the clipboard content
+if [ -z "$TEXT" ]; then
+    TEXT=$(xclip -o -selection clipboard 2>/dev/null)
+fi
+
+# 3. Output the result
+echo "$TEXT"
