@@ -2,6 +2,8 @@
 set -euo pipefail
 set -x  # trace every command
 
+source "$HOME/.config/zsh/path"
+
 LOG=/tmp/awoi.log
 exec >>"$LOG" 2>&1
 
