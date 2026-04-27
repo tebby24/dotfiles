@@ -1,9 +1,9 @@
 #!/bin/bash
+set -euo pipefail
 
-WORD=$(selection-else-clipboard)
+WORD=$("$HOME/scripts/qiyichen/selection-else-clipboard")
 echo "$WORD"
 
-
-chinese-tools add-word "$WORD"
+"$HOME/.local/bin/chinese-tools" add-word "$WORD"
 
 notify-send -t 4000 "word added: $WORD"
