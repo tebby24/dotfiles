@@ -30,7 +30,7 @@ window {
     background-color: @background;
     width: 400px;
     border:           1; 
-    border-color:     @light-gray;
+    border-color:     @lightbg;
     padding:          5;
 }
 
