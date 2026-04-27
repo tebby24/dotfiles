@@ -1,13 +1,17 @@
 #!/bin/bash
 set -euo pipefail
+set -x
 
-# 1. Try to get the highlighted (primary) text
-TEXT=$(xclip -o -selection primary 2>/dev/null)
+echo "[selection] trying primary"
+TEXT=$(xclip -o -selection primary)
 
-# 2. If the primary selection is empty, get the clipboard content
+echo "[selection] primary='$TEXT'"
+
 if [ -z "$TEXT" ]; then
-    TEXT=$(xclip -o -selection clipboard 2>/dev/null)
+    echo "[selection] falling back to clipboard"
+    TEXT=$(xclip -o -selection clipboard)
 fi
 
-# 3. Output the result
+echo "[selection] final='$TEXT'"
+
 echo "$TEXT"
