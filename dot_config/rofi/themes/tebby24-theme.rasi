@@ -89,6 +89,6 @@ inputbar {
 
 prompt {
     text-color: @light-gray;
-    enabled: true;
+    enabled: false;
 }
 
