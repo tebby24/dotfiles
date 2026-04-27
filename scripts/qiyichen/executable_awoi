@@ -1,9 +1,18 @@
 #!/bin/bash
 set -euo pipefail
+set -x  # trace every command
 
-WORD=$("$HOME/scripts/qiyichen/selection-else-clipboard")
-echo "$WORD"
+LOG=/tmp/awoi.log
+exec >>"$LOG" 2>&1
 
-"$HOME/.local/bin/chinese-tools" add-word "$WORD"
+echo "---- $(date) ----"
+echo "PATH=$PATH"
+echo "DISPLAY=${DISPLAY:-<unset>}"
+
+WORD=$(selection-else-clipboard)
+
+echo "WORD='$WORD'"
+
+chinese-tools add-word "$WORD"
 
 notify-send -t 4000 "word added: $WORD"
