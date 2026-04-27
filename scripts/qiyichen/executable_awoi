@@ -1,6 +1,8 @@
 #!/bin/bash
 
 WORD=$(selection-else-clipboard)
+echo "$WORD"
+
 
 chinese-tools add-word "$WORD"
 
