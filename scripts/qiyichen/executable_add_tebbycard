@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
+SELECTED_TEXT=$(xclip -o -selection primary)
+
 export TARGET_WORD=$1
 PROMPT_FILE="$HOME/.config/chinese-tools/prompt.txt"
 
