@@ -15,6 +15,6 @@ WORD=$(selection-else-clipboard)
 
 echo "WORD='$WORD'"
 
-chinese-tools add-word "$WORD"
+chinese-tools wordbank add-word "$WORD"
 
 notify-send -t 4000 "word added: $WORD"
