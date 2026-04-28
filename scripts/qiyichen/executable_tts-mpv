@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+TEXT=$(selection-else-clipboard)
+
+chinese-tools tts --provider google --save-only --output ~/Downloads/audio.wav "$TEXT"
+
+mpv --force-window --osd-level=1 ~/Downloads/audio.wav
