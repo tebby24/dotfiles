@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+source "$HOME/.config/zsh/path"
+
 TEXT=$(selection-else-clipboard)
 
 notify-send "$TEXT"
