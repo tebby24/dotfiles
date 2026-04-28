@@ -3,11 +3,6 @@
 set -euo pipefail
 
 source "$HOME/.config/zsh/path"
-
 TEXT=$(selection-else-clipboard)
-
-notify-send "$TEXT"
-
 chinese-tools tts --provider google --save-only --output ~/Downloads/audio.wav "$TEXT"
-
 mpv --force-window --osd-level=1 ~/Downloads/audio.wav
