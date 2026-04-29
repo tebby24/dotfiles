@@ -1,4 +1,5 @@
 alias cm='chezmoi'
+alias ct='chinese-tools'
 
 alias copy='xclip -selection clipboard'
 
