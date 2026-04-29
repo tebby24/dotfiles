@@ -6,7 +6,7 @@ After=network-online.target
 Type=simple
 WorkingDirectory=/home/qiyichen/tools/chinese-tools
 Environment=PYTHONUNBUFFERED=1
-ExecStart=/home/qiyichen/.venvs/chinese-tools/bin/chinese-tools yomitan-server --host 127.0.0.1 --port 5000 --config /home/qiyichen/.config/chinese-tools/config.toml --provider google
+ExecStart=/home/qiyichen/.venvs/chinese-tools/bin/chinese-tools yomitan-server --host 127.0.0.1 --port 5003 --config /home/qiyichen/.config/chinese-tools/config.toml --provider google
 Restart=on-failure
 RestartSec=2
 
