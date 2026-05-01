@@ -4,5 +4,5 @@ set -euo pipefail
 
 source "$HOME/.config/zsh/path"
 TEXT=$(selection-else-clipboard)
-chinese-tools tts --provider vertex --save-only --output ~/Downloads/audio.wav "$TEXT"
+chinese-tools tts --provider google --save-only --output ~/Downloads/audio.wav "$TEXT"
 mpv --force-window --osd-level=1 ~/Downloads/audio.wav
