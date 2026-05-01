@@ -11,4 +11,4 @@ alias rip='yt-dlp -f "mp4"'
 alias ripsubs='yt-dlp --write-subs --all-subs --no-write-auto-subs --skip-download'
 
 alias silossh='ssh tvgonyea@silo.sice.indiana.edu'
-alias hmsssh='ssh tebby24@192.168.1.74'
+alias hmsssh='ssh tebby24@100.102.107.100'
