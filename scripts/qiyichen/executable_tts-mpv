@@ -2,13 +2,22 @@
 
 set -euo pipefail
 
+# Load paths
 source "$HOME/.config/zsh/path"
+
+# 1. Get the text from selection or clipboard
 TEXT=$(selection-else-clipboard)
 
-# Generate a unique filename using the current date and time
-# Format: 20260510_193542.wav
+# 2. Generate a unique filename using a timestamp
 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
 OUTPUT_FILE="$HOME/Downloads/audio_${TIMESTAMP}.wav"
 
+# 3. Generate the audio file
 chinese-tools tts --provider google --save-only --output "$OUTPUT_FILE" "$TEXT"
+
+# 4. Copy the file to the clipboard as a URI (so Anki recognizes it as a file)
+# We use realpath to get the full absolute path and prefix it with file://
+echo -n "file://$(realpath "$OUTPUT_FILE")" | xclip -i -sel clipboard -t text/uri-list
+
+# 5. Play the audio
 mpv --force-window --osd-level=1 "$OUTPUT_FILE"
