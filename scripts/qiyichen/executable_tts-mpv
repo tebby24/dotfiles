@@ -4,5 +4,11 @@ set -euo pipefail
 
 source "$HOME/.config/zsh/path"
 TEXT=$(selection-else-clipboard)
-chinese-tools tts --provider google --save-only --output ~/Downloads/audio.wav "$TEXT"
-mpv --force-window --osd-level=1 ~/Downloads/audio.wav
+
+# Generate a unique filename using the current date and time
+# Format: 20260510_193542.wav
+TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
+OUTPUT_FILE="$HOME/Downloads/audio_${TIMESTAMP}.wav"
+
+chinese-tools tts --provider google --save-only --output "$OUTPUT_FILE" "$TEXT"
+mpv --force-window --osd-level=1 "$OUTPUT_FILE"
