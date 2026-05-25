@@ -55,3 +55,4 @@ zip
 tree
 feh
 keyd
+kate
