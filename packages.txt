@@ -56,3 +56,4 @@ tree
 feh
 keyd
 kate
+konsole
