@@ -11,6 +11,7 @@ vim.opt.signcolumn = "yes"
 vim.opt.clipboard = "unnamedplus"
 vim.opt.swapfile = false
 vim.o.winborder = "rounded"
+vim.opt.termguicolors = true
 
 -- Disable netrw so Oil can take over file browsing
 vim.g.loaded_netrw = 1
