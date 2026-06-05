@@ -17,7 +17,7 @@ vim.opt.termguicolors = true
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
--- Built-in plugin manager (Neovim 0.12+)
+-- Built-in plugin manager 
 vim.pack.add({
     { src = "https://github.com/vague-theme/vague.nvim" },
     { src = "https://github.com/stevearc/oil.nvim" },
@@ -46,11 +46,6 @@ vim.keymap.set("n", "<leader>e", "<cmd>Oil<CR>", {
     desc = "Open Oil file explorer",
 })
 
-
--- Only highlight with treesitter
--- vim.cmd('syntax off')
-
-
 -- Treesitter
 -- Keep nvim-treesitter for parsers/queries, but let Neovim handle highlighting.
 require("nvim-treesitter").setup({})
@@ -76,98 +71,3 @@ vim.keymap.set("n", "<leader>p", "<cmd>Telescope commands<CR>", {
 
 -- Autopairs
 require("nvim-autopairs").setup({})
-
--- LSP
-do
-    local border = "rounded"
-
-    vim.diagnostic.config({
-        virtual_text = false,
-        signs = true,
-        underline = true,
-        update_in_insert = false,
-        severity_sort = true,
-        float = {
-            border = border,
-            source = "always",
-            header = "",
-            prefix = "",
-        },
-    })
-
-    -- Global defaults for all LSP servers
-    vim.lsp.config("*", {
-        root_markers = {
-            ".git",
-            "pyproject.toml",
-            "setup.py",
-            "Makefile",
-            "package.json",
-        },
-
-        on_attach = function(_, bufnr)
-            vim.diagnostic.enable(true, { bufnr = bufnr })
-
-            local opts = { buffer = bufnr, silent = true }
-
-            vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-            vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-            vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-            vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-
-            vim.keymap.set("n", "K", function()
-                vim.lsp.buf.hover({ border = border })
-            end, opts)
-        end,
-    })
-
-    -- Server-specific config
-    vim.lsp.config("lua_ls", {
-        settings = {
-            Lua = {
-                diagnostics = { globals = { "vim" } },
-                workspace = { checkThirdParty = false },
-            },
-        },
-    })
-
-    vim.lsp.config("pyright", {
-        settings = {
-            python = {
-                analysis = {
-                    typeCheckingMode = "basic",
-                    autoSearchPaths = true,
-                    useLibraryCodeForTypes = true,
-                },
-            },
-        },
-    })
-
-    -- Enable servers
-    vim.lsp.enable({
-        "lua_ls",
-        "clangd",
-        "marksman",
-        "pyright",
-    })
-
-    -- Diagnostic navigation
-    vim.keymap.set("n", "[d", function()
-        vim.diagnostic.jump({ count = -1, float = true })
-    end, { desc = "Previous diagnostic" })
-
-    vim.keymap.set("n", "]d", function()
-        vim.diagnostic.jump({ count = 1, float = true })
-    end, { desc = "Next diagnostic" })
-
-    vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, {
-        desc = "Line diagnostics",
-    })
-end
-
--- Yank highlight
-vim.api.nvim_create_autocmd("TextYankPost", {
-    callback = function()
-        vim.highlight.on_yank()
-    end,
-})
