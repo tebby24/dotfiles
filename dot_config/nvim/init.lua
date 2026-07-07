@@ -91,8 +91,6 @@ vim.pack.add({
   'https://github.com/nvim-mini/mini.completion',
   -- Enhanced quickfix/loclist
   'https://github.com/stevearc/quicker.nvim',
-  -- Git integration
-  'https://github.com/lewis6991/gitsigns.nvim',
 })
 
 require('fzf-lua').setup { fzf_colors = true }
