@@ -91,6 +91,7 @@ vim.pack.add({
   'https://github.com/nvim-mini/mini.completion',
 })
 
+
 require('fzf-lua').setup { fzf_colors = true }
 require('mini.completion').setup {}
 vim.opt.number = true
