@@ -89,13 +89,10 @@ vim.pack.add({
   'https://github.com/ibhagwan/fzf-lua',
   -- Autocompletion
   'https://github.com/nvim-mini/mini.completion',
-  -- Enhanced quickfix/loclist
-  'https://github.com/stevearc/quicker.nvim',
 })
 
 require('fzf-lua').setup { fzf_colors = true }
 require('mini.completion').setup {}
-require('quicker').setup {}
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.tabstop = 4
