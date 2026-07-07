@@ -96,7 +96,6 @@ vim.pack.add({
 require('fzf-lua').setup { fzf_colors = true }
 require('mini.completion').setup {}
 require('quicker').setup {}
-require('gitsigns').setup {}
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.tabstop = 4
