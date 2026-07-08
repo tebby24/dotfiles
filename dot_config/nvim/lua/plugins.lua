@@ -7,8 +7,8 @@ vim.pack.add({
     'https://github.com/nvim-mini/mini.completion',
 })
 
-vim.cmd.colorscheme('vague')
 require('vague').setup { transparent = true }
+vim.cmd.colorscheme('vague')
 
 require('fzf-lua').setup { fzf_colors = true }
 
