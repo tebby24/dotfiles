@@ -20,4 +20,4 @@ else
     if [[ -n "$selection" ]]; then
         $CHROME --profile-email="$selection" --new-window &
     fi
-fii
+fi
