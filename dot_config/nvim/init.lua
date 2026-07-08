@@ -10,8 +10,6 @@ vim.o.scrolloff = 10
 vim.o.list = true
 vim.o.confirm = true
 
--- Highlight when yanking (copying) text.
--- Try it with `yap` in normal mode. See `:h vim.hl.on_yank()`
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
   callback = function()
@@ -19,23 +17,19 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
--- Add the "nohlsearch" package to automatically disable search highlighting after
--- 'updatetime' and when going to insert mode.
+-- plugins
+
 vim.cmd.packadd('nohlsearch')
 
--- Install third-party plugins via "vim.pack.add()".
 vim.pack.add({
-  -- Quickstart configs for LSP
   'https://github.com/neovim/nvim-lspconfig',
-  -- Fuzzy picker
   'https://github.com/ibhagwan/fzf-lua',
-  -- Autocompletion
   'https://github.com/nvim-mini/mini.completion',
 })
 
-
 require('fzf-lua').setup { fzf_colors = true }
 require('mini.completion').setup {}
+
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.tabstop = 4
