@@ -1,8 +1,4 @@
 openbox
-i3-wm
-i3status
-i3lock
-i3blocks
 adobe-source-han-sans-cn-fonts
 alacritty
 chezmoi
@@ -55,5 +51,4 @@ zip
 tree
 feh
 keyd
-kate
-konsole
+flatpak
