@@ -1,2 +1,3 @@
 com.google.Chrome
 com.tencent.WeChat
+com.visualstudio.code
