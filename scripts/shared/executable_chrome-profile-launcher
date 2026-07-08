@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# Use absolute paths for binaries
-CHROME="/usr/bin/google-chrome-stable"
+# Use the flatpak execution wrapper
+CHROME="flatpak run com.google.Chrome"
 ROFI="/usr/bin/rofi"
 
 emails=("$@")
@@ -10,16 +10,14 @@ count=${#emails[@]}
 if (( count == 0 )); then
     exit 1
 elif (( count == 1 )); then
-    # Use the absolute path variable here
     $CHROME --profile-email="${emails[0]}" --new-window &
 else
     max_lines=10
     lines=$(( count < max_lines ? count : max_lines ))
 
-    # Use the absolute path variable here
     selection=$(printf "%s\n" "${emails[@]}" | $ROFI -dmenu -i -p "Select Chrome Profile" -l "$lines")
 
     if [[ -n "$selection" ]]; then
         $CHROME --profile-email="$selection" --new-window &
     fi
-fi
+fii
