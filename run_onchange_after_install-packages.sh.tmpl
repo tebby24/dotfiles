@@ -1,0 +1,60 @@
+#!/bin/bash
+set -euo pipefail
+
+# packages.txt hash: {{ include "packages.txt" | sha256sum }}
+# flatpaks.txt hash: {{ include "flatpaks.txt" | sha256sum }}
+
+PKG_FILE="$HOME/packages.txt"
+FLATPAK_FILE="$HOME/flatpaks.txt"
+
+# ==========================================
+# 1. PACMAN SYNCHRONIZATION
+# ==========================================
+declare -A installed
+while read -r pkg; do
+    installed["$pkg"]=1
+done < <(pacman -Qq)
+
+missing=()
+if [[ -f "$PKG_FILE" ]]; then
+    while read -r pkg; do
+        [[ -z "$pkg" || "$pkg" =~ ^# ]] && continue
+        if [[ -z "${installed[$pkg]+x}" ]]; then
+            missing+=("$pkg")
+        fi
+    done < "$PKG_FILE"
+fi
+
+if (( ${#missing[@]} > 0 )); then
+    echo "Installing missing pacman packages: ${missing[*]}"
+    sudo pacman -S --needed --noconfirm "${missing[@]}"
+else
+    echo "All pacman packages already installed."
+fi
+
+# ==========================================
+# 2. FLATPAK SYNCHRONIZATION
+# ==========================================
+if [[ -f "$FLATPAK_FILE" ]]; then
+    declare -A installed_flatpaks
+    # Populate table with installed App IDs
+    while read -r app; do
+        installed_flatpaks["$app"]=1
+    done < <(flatpak list --app --columns=application)
+
+    missing_flatpaks=()
+    while read -r app; do
+        [[ -z "$app" || "$app" =~ ^# ]] && continue
+        if [[ -z "${installed_flatpaks[$app]+x}" ]]; then
+            missing_flatpaks+=("$app")
+        fi
+    done < "$FLATPAK_FILE"
+
+    if (( ${#missing_flatpaks[@]} > 0 )); then
+        echo "Installing missing Flatpaks: ${missing_flatpaks[*]}"
+        # -y answers yes to prompts, --noninteractive stops terminal hangs
+        flatpak install -y --noninteractive flathub "${missing_flatpaks[@]}"
+    else
+        echo "All Flatpaks already installed."
+    fi
+fi
