@@ -21,7 +21,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 -- Add the "nohlsearch" package to automatically disable search highlighting after
 -- 'updatetime' and when going to insert mode.
-packadd('nohlsearch')
+vim.cmd.packadd('nohlsearch')
 
 -- Install third-party plugins via "vim.pack.add()".
 vim.pack.add({
