@@ -53,3 +53,4 @@ feh
 keyd
 flatpak
 code
+anki
