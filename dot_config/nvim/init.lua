@@ -10,27 +10,6 @@ vim.o.scrolloff = 10
 vim.o.list = true
 vim.o.confirm = true
 
--- KEYMAPS
---
--- See `:h vim.keymap.set()`, `:h mapping`, `:h keycodes`
-
--- Use <Esc> to exit terminal mode
-vim.keymap.set('t', '<Esc>', '<C-\\><C-n>')
-
--- Map <A-j>, <A-k>, <A-h>, <A-l> to navigate between windows in any modes
-vim.keymap.set({ 't', 'i' }, '<A-h>', '<C-\\><C-n><C-w>h')
-vim.keymap.set({ 't', 'i' }, '<A-j>', '<C-\\><C-n><C-w>j')
-vim.keymap.set({ 't', 'i' }, '<A-k>', '<C-\\><C-n><C-w>k')
-vim.keymap.set({ 't', 'i' }, '<A-l>', '<C-\\><C-n><C-w>l')
-vim.keymap.set({ 'n' }, '<A-h>', '<C-w>h')
-vim.keymap.set({ 'n' }, '<A-j>', '<C-w>j')
-vim.keymap.set({ 'n' }, '<A-k>', '<C-w>k')
-vim.keymap.set({ 'n' }, '<A-l>', '<C-w>l')
-
--- AUTOCOMMANDS (EVENT HANDLERS)
---
--- See `:h lua-guide-autocommands`, `:h autocmd`, `:h nvim_create_autocmd()`
-
 -- Highlight when yanking (copying) text.
 -- Try it with `yap` in normal mode. See `:h vim.hl.on_yank()`
 vim.api.nvim_create_autocmd('TextYankPost', {
@@ -40,17 +19,9 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
--- USER COMMANDS: DEFINE CUSTOM COMMANDS
---
--- See `:h nvim_create_user_command()` and `:h user-commands`
-
--- PLUGINS
---
--- See `:h :packadd`, `:h vim.pack`
-
 -- Add the "nohlsearch" package to automatically disable search highlighting after
 -- 'updatetime' and when going to insert mode.
-vim.cmd('packadd! nohlsearch')
+packadd('nohlsearch')
 
 -- Install third-party plugins via "vim.pack.add()".
 vim.pack.add({
