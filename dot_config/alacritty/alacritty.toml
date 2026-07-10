@@ -1,3 +1,6 @@
+[general]
+import = ["vague.toml"]
+
 [colors.primary]
 background = "#000000"
 
