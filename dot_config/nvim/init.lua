@@ -45,3 +45,8 @@ vim.cmd.colorscheme('vague')
 require('fzf-lua').setup { fzf_colors = true }
 
 require("oil").setup()
+
+-- keybinds
+vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+
+
