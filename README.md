@@ -45,6 +45,26 @@ title the SSH key: _hostname (username)_
 
 determine your machine's hostname with `cat /etc/hostname`
 
+### configure keyd
+enable and start keyd in systemd
+```shell
+sudo systemctl enable keyd --now
+```
+
+paste the following into `/etc/keyd/default.conf`:
+```shell
+[ids]
+*
+
+[main]
+
+capslock = leftcontrol
+leftcontrol = capslock
+
+leftalt = leftmeta
+leftmeta = leftalt
+```
+
 ### write chezmoi config
 create the configuration file
 ```shell
