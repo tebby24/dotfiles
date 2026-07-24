@@ -27,6 +27,12 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     end,
 })
 
+-- set filetype to verilog for .hdl files
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = "*.hdl",
+  command = "set filetype=verilog",
+})
+
 
 -- plugins
 
