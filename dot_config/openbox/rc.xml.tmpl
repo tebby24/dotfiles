@@ -393,12 +393,17 @@
           </action>
         </keybind>
 
-        <keybind key="W-c">
+        <keybind key="W-r">
           <action name="Execute">
-            <command>~/scripts/shared/scrot-ocr "{{.google_ocr_key}}"</command>
+            <command>~/scripts/shared/screen-capture -r</command>
           </action>
         </keybind>
 
+        <keybind key="W-C-r">
+          <action name="Execute">
+            <command>~/scripts/shared/screen-capture</command>
+          </action>
+        </keybind>
 
         {{ if eq .chezmoi.username "qiyichen" }}
         <keybind key="W-m">
