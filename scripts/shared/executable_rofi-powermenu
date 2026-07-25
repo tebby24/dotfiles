@@ -3,7 +3,7 @@
 # Simple rofi power menu for X11, with confirmation prompts
 
 # Main menu
-chosen=$(printf "logout\nswitch user\nshutdown\nreboot\nscreen capture (full screen)\nscreen capture (region)" | rofi -dmenu -i -p "Power Menu")
+chosen=$(printf "logout\nswitch user\nshutdown\nreboot" | rofi -dmenu -i -p "Power Menu")
 
 # Confirmation function
 confirm() {
