@@ -54,3 +54,4 @@ keyd
 flatpak
 code
 anki
+tldr
