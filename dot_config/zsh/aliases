@@ -5,6 +5,7 @@ alias copy='xclip -selection clipboard'
 
 alias printpath='echo "$PATH" | tr ":" "\n"'
 
+alias ls='ls --color=auto --group-directories-first'
 alias ll='ls -lha --color=auto --group-directories-first'
 
 alias rip='yt-dlp -f "mp4"'
