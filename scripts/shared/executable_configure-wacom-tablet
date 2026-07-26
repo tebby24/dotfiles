@@ -24,6 +24,6 @@ xsetwacom set "Wacom Intuos S Pad pad" MapToOutput "$MONITOR"
 
 # Reversed pad button mapping
 xsetwacom set "Wacom Intuos S Pad pad" Button 8 "key +ctrl z -ctrl" 
-xsetwacom set "Wacom Intuos S Pad pad" Button 3 "key v"            
+xsetwacom set "Wacom Intuos S Pad pad" Button 3 "key s"            
 xsetwacom set "Wacom Intuos S Pad pad" Button 2 "key e"           
 xsetwacom set "Wacom Intuos S Pad pad" Button 1 "key p"
