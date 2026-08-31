@@ -1,15 +1,22 @@
+```bash
 #!/bin/bash
 
-# 0. Check if API Key was provided as an argument
-if [ -z "$1" ]; then
-    echo "Usage: $0 <GOOGLE_OCR_API_KEY>"
-    notify-send "OCR Error" "No API Key provided."
+# Configuration
+KEY_FILE="$HOME/.config/scrot-ocr/google-ocr-key"
+TEMP_IMG="/tmp/ocr_shot.png"
+
+# 0. Read API key
+if [ ! -f "$KEY_FILE" ]; then
+    notify-send "OCR Error" "Google OCR API key not found."
     exit 1
 fi
 
-# Configuration
-API_KEY="$1"
-TEMP_IMG="/tmp/ocr_shot.png"
+API_KEY=$(<"$KEY_FILE")
+
+if [ -z "$API_KEY" ]; then
+    notify-send "OCR Error" "Google OCR API key is empty."
+    exit 1
+fi
 
 # 1. Capture selected area with scrot
 sleep 0.2 && scrot -s "$TEMP_IMG" || exit 1
@@ -47,3 +54,4 @@ fi
 
 # Cleanup
 rm "$TEMP_IMG"
+```
