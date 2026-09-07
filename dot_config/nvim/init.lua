@@ -45,6 +45,10 @@ require('fzf-lua').setup { fzf_colors = true }
 require("oil").setup()
 
 -- keybinds
-vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+-- Oil
+vim.keymap.set("n", "-", "<cmd>Oil<cr>")
 
+-- FzfLua
+vim.keymap.set("n", "<leader>f", "<cmd>FzfLua files<cr>")
+vim.keymap.set("n", "<leader>p", "<cmd>FzfLua commands<cr>")
 
