@@ -10,7 +10,7 @@ vim.o.smartcase = true
 vim.o.cursorline = false
 vim.o.scrolloff = 10
 vim.o.list = true
-vim.opt.listchars = { leadmultispace = '│ ', tab = '│ ' }
+vim.opt.listchars = { leadmultispace = '│   ', tab = '│ ' }
 vim.o.confirm = true
 vim.o.signcolumn = "yes"
 vim.o.swapfile = false
