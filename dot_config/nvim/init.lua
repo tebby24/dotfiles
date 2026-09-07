@@ -49,6 +49,7 @@ require("oil").setup()
 vim.keymap.set("n", "-", "<cmd>Oil<cr>")
 
 -- FzfLua
-vim.keymap.set("n", "<leader>f", "<cmd>FzfLua files<cr>")
-vim.keymap.set("n", "<leader>p", "<cmd>FzfLua commands<cr>")
+vim.keymap.set('n', '<leader>ff', function() require('fzf-lua').files() end)
+vim.keymap.set('n', '<leader>fg', function() require('fzf-lua').live_grep() end)
+vim.keymap.set('n', '<leader>fh', function() require('fzf-lua').help_tags() end)
 
