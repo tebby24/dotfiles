@@ -19,20 +19,12 @@ vim.o.shiftwidth = 4
 vim.o.expandtab = true
 
 -- autocommands
-
 vim.api.nvim_create_autocmd('TextYankPost', {
     desc = 'Highlight when yanking (copying) text',
     callback = function()
         vim.hl.on_yank()
     end,
 })
-
--- set filetype to verilog for .hdl files
-vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-  pattern = "*.hdl",
-  command = "set filetype=verilog",
-})
-
 
 -- plugins
 
