@@ -57,3 +57,4 @@ anki
 tldr
 age
 alsa-utils
+brightnessctl
