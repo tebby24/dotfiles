@@ -57,7 +57,7 @@ sudo systemctl enable keyd --now
 ```
 
 paste the following into `/etc/keyd/default.conf`:
-```shell
+```
 [ids]
 *
 
@@ -68,6 +68,22 @@ leftcontrol = capslock
 
 leftalt = leftmeta
 leftmeta = leftalt
+```
+
+### configure natural scrolling
+paste the following into `/etc/X11/xorg.conf.d/40-libinput-natural-scrolling.conf`
+```
+Section "InputClass"
+    Identifier "Enable natural scrolling for all devices"
+    MatchDriver "libinput"
+    Option "NaturalScrolling" "true"
+EndSection
+Section "InputClass"
+    Identifier "Touchpads"
+    MatchIsTouchpad "on"
+    MatchDriver "libinput"
+    Option "NaturalScrolling" "true"
+EndSection
 ```
 
 ### write chezmoi config
