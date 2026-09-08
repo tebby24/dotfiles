@@ -58,3 +58,4 @@ tldr
 age
 alsa-utils
 brightnessctl
+xorg-xrandr
