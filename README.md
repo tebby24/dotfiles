@@ -74,51 +74,22 @@ touch ~/.config/chezmoi/chezmoi.toml
 fill in the config using the following template
 
 ```toml
-[data]
-    displays = [
-        {
-            name = "HDMI-A-0",
-            wallpaper = "/home/tebby24/Pictures/wallpapers/primary.jpg",
-            primary = true,
-            relation = "",
-            relative_to = "",
-            rotate = "normal"
-        },
-        {
-            name = "DisplayPort-0",
-            wallpaper = "/home/tebby24/Pictures/wallpapers/secondary.png",
-            primary = false,
-            relation = "left-of",
-            relative_to = "HDMI-A-0",
-            rotate = "left"
-        }
-    ]
+encryption = "age"
 
-    network_interface = "wlan0"
-    chrome_profiles = ["enterted@gmail.com", "tvgonyea@iu.edu"]
-    google_ocr_key = "getitfromthewebsitebruh"
+[data]
+network_interface = "wlan0"
+wallpaper = "minami-ke.jpg"
+chrome_profiles = ["enterted@gmail.com", "tvgonyea@iu.edu"]
 
 [git]
-    autoCommit = true
-    autoPush = true
+autoCommit = true
+autoPush = true
 
 [edit]
-    apply = true
-    command = "nvim"
-```
+apply = true
+command = "nvim"
 
-### configure output
-this only needs to be done once per machine
-
-create the following file
+[age]
+identity = "~/.config/chezmoi/key.txt"
+recipient = "age1hqpw2dl4k3gxjjj22nldl3vgua4dfmlej94lfqfkr8vj4n44fv5qkecz84"
 ```
-sudo touch /usr/local/bin/configure-output
-```
-
-edit the file using the following as an example
-```bash
-#!/usr/bin/env bash
-xrandr --output DisplayPort-2  --mode 1920x1080 --primary --auto
-```
-query the output name using xrandr
-
