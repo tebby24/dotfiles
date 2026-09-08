@@ -85,6 +85,7 @@ Section "InputClass"
     Option "NaturalScrolling" "true"
 EndSection
 ```
+log out and log back in
 
 ### write chezmoi config
 create the configuration file
