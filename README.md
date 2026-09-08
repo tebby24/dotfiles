@@ -15,19 +15,18 @@ setup for use with a single monitor
 
 ## setup a new computer
 ### install relevant packages
-must be performed for __each user__ on the machine
 ```shell
 sudo pacman -Syu chezmoi git
 ```
 ```shell
 chezmoi init tebby24
-
 ```
 ```shell
-chezmoi apply -v
+chezmoi apply -v --exclude=encrypted
 ```
 
 ### setup ssh key with github
+must be performed for __each user__ on the machine
 this is necessary to push dotfile changes to the remote repo
 
 generate an ssh key
