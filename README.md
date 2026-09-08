@@ -25,6 +25,12 @@ chezmoi init tebby24
 chezmoi apply -v --exclude=encrypted
 ```
 
+### enable LightDM at boot
+```shell
+sudo systemctl enable lightdm
+```
+
+
 ### setup ssh key with github
 must be performed for __each user__ on the machine
 this is necessary to push dotfile changes to the remote repo
