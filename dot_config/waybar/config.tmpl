@@ -46,10 +46,10 @@
 
     "battery": {
         "states": {
-            // "good": 95,
+            "good": 95,
             "warning": 30,
             "critical": 15
-        },
+        }
         "format": "{capacity}% {icon}",
         "format-full": "{capacity}% {icon}",
         "format-charging": "{capacity}% 󰂄 ",
@@ -74,7 +74,9 @@
         "on-click": "pavucontrol"
     },
     "custom/hostuser": {
-    "format": " t480-arch (tebby24)",
+
+
+    "format": " {{ .chezmoi.hostname }} ({{ .chezmoi.username }})",
     "tooltip": false
     }
 }
