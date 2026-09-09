@@ -4,9 +4,7 @@
 MONITOR=$(xrandr | awk '/ primary/{print $1}')
 
 # Fallback in case no primary is set
-if [ -z "$MONITOR" ]; then
-    MONITOR=$(xrandr | awk '/ connected/{print $1; exit}')
-fi
+MONITOR=$(xrandr | awk '/ connected/{print $1; exit}')
 
 # Rotate tablet 180°
 xsetwacom set "Wacom Intuos S Pen stylus" Rotate half
