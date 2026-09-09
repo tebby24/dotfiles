@@ -1,7 +1,7 @@
 @theme "tebby24-theme"
 
 configuration {
-    modes: [window,drun,run,ssh,windowcd];
+    modes: [window,drun,run,ssh];
     show-icons: true;
 }
 
