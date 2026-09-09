@@ -60,5 +60,5 @@ alsa-utils
 brightnessctl
 xorg-xrandr
 labwc
-xorg-wayland
+xorg-xwayland
 waybar
