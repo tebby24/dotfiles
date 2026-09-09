@@ -1,6 +1,7 @@
 mako &
 
 swaybg -o eDP-1 -i /home/tebby24/Pictures/wallpapers/minai-ke-stars.jpg -m fill  &
+xwallpaper --stretch "{{ .chezmoi.homeDir }}/Pictures/wallpapers/{{ .wallpaper }}"
 
 waybar --style ~/.config/waybar/style.css &
 
