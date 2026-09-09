@@ -177,7 +177,6 @@
         </keybind>
 
 
-
         <keybind key="W-Return">
             <action name="Execute" command="alacritty" />
         </keybind>
