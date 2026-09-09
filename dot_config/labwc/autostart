@@ -1,0 +1,14 @@
+kanshi &
+
+mako &
+
+swaybg -o eDP-1 -i /home/tebby24/Pictures/wallpapers/minai-ke-stars.jpg -m fill  &
+
+
+waybar --style ~/.config/waybar/style.css &
+
+fcitx5 -d &
+
+gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
+gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+
