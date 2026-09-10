@@ -64,3 +64,4 @@ xorg-xwayland
 waybar
 swaybg
 wl-clipboard
+kanshi
