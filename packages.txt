@@ -62,5 +62,5 @@ xorg-xrandr
 labwc
 xorg-xwayland
 waybar
-swaygb
+swaybg
 wl-clipboard
