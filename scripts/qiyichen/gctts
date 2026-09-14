@@ -1,0 +1,7 @@
+KEY_FILE="$HOME/.config/secrets/google-tts-key"
+
+./gctts.py \
+    -k "$GOOGLE_TTS_KEY" \
+    -v cmn-CN-Wavenet-A \
+    "这是一个测试。" \
+    -o test.mp3
