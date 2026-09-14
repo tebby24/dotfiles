@@ -22,7 +22,6 @@ pitch=0.0,
 ):
 """Synthesize text using Google Cloud Text-to-Speech REST API."""
 
-```
 url = API_URL + "?" + urllib.parse.urlencode({"key": api_key})
 
 request_body = {
