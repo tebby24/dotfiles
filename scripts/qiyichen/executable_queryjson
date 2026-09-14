@@ -1,0 +1,28 @@
+#!/bin/zsh
+
+# Check if the correct number of arguments is provided
+if [ $# -ne 1 ]; then
+    echo "Usage: $0 <json_file>"
+    exit 1
+fi
+
+# Get the JSON file path from the argument
+json_file="$1"
+
+# Check if the JSON file exists
+if [ ! -f "$json_file" ]; then
+    echo "Error: File not found: $json_file"
+    exit 1
+fi
+
+# Path to the Python script
+python_script="$HOME/tools/query-json/query_json.py"
+
+# Check if the Python script exists
+if [ ! -f "$python_script" ]; then
+    echo "Error: Python script not found: $python_script"
+    exit 1
+fi
+
+# Run the Python script with the JSON file as an argument
+python3 "$python_script" "$json_file"
