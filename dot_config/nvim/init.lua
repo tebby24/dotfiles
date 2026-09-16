@@ -49,7 +49,7 @@ require('fzf-lua').setup { fzf_colors = true }
 require("oil").setup()
 
 -- LSP
-vim.lsp.enable('clangd')
+-- vim.lsp.enable('clangd')
 
 -- keybinds
 -- Oil
