@@ -49,6 +49,8 @@ require('fzf-lua').setup { fzf_colors = true }
 
 require("oil").setup()
 
+require("autoclose").setup()
+
 -- LSP
 -- vim.lsp.enable('clangd')
 
