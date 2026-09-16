@@ -39,6 +39,7 @@ vim.pack.add({
     'https://github.com/neovim/nvim-lspconfig',
     'https://github.com/ibhagwan/fzf-lua',
     'https://github.com/stevearc/oil.nvim',
+    'https://github.com/m4xshen/autoclose.nvim',
 })
 
 require('vague').setup { transparent = true }
