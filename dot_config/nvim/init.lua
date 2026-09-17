@@ -42,6 +42,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 vim.cmd.packadd('nohlsearch')
 vim.pack.add({
     'https://github.com/vague-theme/vague.nvim',
+    'https://github.com/loctvl842/monokai-pro.nvim',
     'https://github.com/neovim/nvim-lspconfig',
     'https://github.com/ibhagwan/fzf-lua',
     'https://github.com/stevearc/oil.nvim',
@@ -52,6 +53,7 @@ vim.pack.add({
 
 
 require('vague').setup { transparent = true }
+require('monokai-pro').setup { transparent_background = true }
 vim.cmd.colorscheme('vague')
 
 require('fzf-lua').setup { fzf_colors = true }
