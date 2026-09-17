@@ -71,6 +71,10 @@ vim.lsp.enable({'clangd', 'pyright'})
 -- KEYBINDS
 -- ########
 
+-- Tabs
+vim.keymap.set('n', '<C-Tab>', ':tabnext<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-S-Tab>', ':tabprevious<CR>', { noremap = true, silent = true })
+
 -- Oil
 vim.keymap.set("n", "-", "<cmd>Oil<cr>")
 
