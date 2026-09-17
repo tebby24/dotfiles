@@ -60,7 +60,7 @@ require('monokai-pro').setup {
 		return {
 			dark2 = "#101014",
 			dark1 = "#16161E",
-			background = "000000",
+			background = "#000000",
 			text = "#C0CAF5",
 			accent1 = "#f7768e",
 			accent2 = "#7aa2f7",
