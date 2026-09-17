@@ -37,6 +37,7 @@ vim.pack.add({
     'https://github.com/ibhagwan/fzf-lua',
     'https://github.com/stevearc/oil.nvim',
     'https://github.com/m4xshen/autoclose.nvim',
+    'https://github.com/nvim-mini/mini.surround',
 })
 
 require('vague').setup { transparent = true }
@@ -49,7 +50,7 @@ require("oil").setup()
 require("autoclose").setup()
 
 -- LSP
-vim.lsp.enable('clangd')
+vim.lsp.enable({'clangd'})
 
 
 
