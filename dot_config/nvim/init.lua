@@ -45,12 +45,16 @@ vim.cmd.colorscheme('vague')
 
 require('fzf-lua').setup { fzf_colors = true }
 
-require("oil").setup()
+require('oil').setup()
 
-require("autoclose").setup()
+require('autoclose').setup()
+
+require('mini.surround').setup()
+
+
 
 -- LSP
-vim.lsp.enable({'clangd'})
+vim.lsp.enable('clangd')
 
 
 
