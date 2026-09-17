@@ -41,7 +41,7 @@ vim.pack.add({
     'https://github.com/nvim-mini/mini.surround',
 })
 
-require{'nvim-treesitter.configs'}.setup {
+require('nvim-treesitter.configs').setup {
     incremental_selection = {
         enable = true,
         keymaps = {
