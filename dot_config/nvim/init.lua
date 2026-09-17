@@ -32,7 +32,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- plugins
 vim.cmd.packadd('nohlsearch')
 vim.pack.add({
-    'https://github.com/nvim-treesitter/nvim-treesitter',
     'https://github.com/vague-theme/vague.nvim',
     'https://github.com/neovim/nvim-lspconfig',
     'https://github.com/ibhagwan/fzf-lua',
@@ -41,17 +40,6 @@ vim.pack.add({
     'https://github.com/nvim-mini/mini.surround',
 })
 
-require('nvim-treesitter.configs').setup {
-    incremental_selection = {
-        enable = true,
-        keymaps = {
-            init_selection = "<CR>",     -- start incremental selection
-            node_incremental = "<TAB>",  -- increment to upper named node
-            scope_incremental = "<CR>",  -- increment to current scope
-            node_decremental = "<S-TAB>",-- decrement to previous node
-        },
-    },
-}
 
 require('vague').setup { transparent = true }
 vim.cmd.colorscheme('vague')
