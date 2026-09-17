@@ -76,7 +76,7 @@ require('monokai-pro').setup {
 		}
 	end,
 }
-vim.cmd.colorscheme('vague')
+vim.cmd.colorscheme('monokai-pro')
 
 
 require('fzf-lua').setup { fzf_colors = true }
