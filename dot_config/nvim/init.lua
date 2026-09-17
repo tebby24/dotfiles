@@ -53,13 +53,15 @@ vim.pack.add({
 })
 
 
+
+
 require('vague').setup { transparent = true }
 require('monokai-pro').setup { 
 	transparent_background = true,
 	override_palette = function(filter)
 		return {
-			dark2 = "#101014",
-			dark1 = "#16161E",
+			dark2 = "#000000",
+			dark1 = "#000000",
 			background = "#000000",
 			text = "#C0CAF5",
 			accent1 = "#f7768e",
