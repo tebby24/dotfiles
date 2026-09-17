@@ -52,10 +52,8 @@ require('autoclose').setup()
 
 require('mini.surround').setup()
 
-
-
 -- LSP
-vim.lsp.enable('clangd')
+vim.lsp.enable({'clangd', 'pyright', 'lua-language-server'})
 
 
 
