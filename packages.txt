@@ -65,3 +65,5 @@ waybar
 swaybg
 wl-clipboard
 kanshi
+clang
+pyright
