@@ -67,3 +67,4 @@ wl-clipboard
 kanshi
 clang
 pyright
+feh
