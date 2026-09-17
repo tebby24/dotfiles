@@ -1,4 +1,7 @@
--- options
+-- #######
+-- OPTIONS
+-- #######
+
 vim.loader.enable()
 
 vim.g.mapleader = " "
@@ -21,7 +24,10 @@ vim.o.shiftwidth = 4
 vim.o.expandtab = true
 vim.opt.splitright = true
 
--- autocommands
+-- ############
+-- AUTOCOMMANDS
+-- ############
+
 vim.api.nvim_create_autocmd('TextYankPost', {
     desc = 'Highlight when yanking (copying) text',
     callback = function()
@@ -29,7 +35,10 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     end,
 })
 
--- plugins
+-- #######
+-- PLUGINS
+-- #######
+
 vim.cmd.packadd('nohlsearch')
 vim.pack.add({
     'https://github.com/vague-theme/vague.nvim',
@@ -52,11 +61,16 @@ require('autoclose').setup()
 
 require('mini.surround').setup()
 
+-- ###
 -- LSP
+-- ###
+
 vim.lsp.enable({'clangd', 'pyright'})
 
+-- ########
+-- KEYBINDS
+-- ########
 
--- keybinds
 -- Oil
 vim.keymap.set("n", "-", "<cmd>Oil<cr>")
 
