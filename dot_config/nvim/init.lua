@@ -51,6 +51,8 @@ require("autoclose").setup()
 -- LSP
 vim.lsp.enable('clangd')
 
+
+
 -- keybinds
 -- Oil
 vim.keymap.set("n", "-", "<cmd>Oil<cr>")
