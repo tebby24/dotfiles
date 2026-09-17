@@ -60,21 +60,8 @@ require('monokai-pro').setup {
 	transparent_background = true,
 	override_palette = function(filter)
 		return {
-			dark2 = "#000000",
-			dark1 = "#000000",
 			background = "#000000",
-			text = "#C0CAF5",
-			accent1 = "#f7768e",
-			accent2 = "#7aa2f7",
-			accent3 = "#e0af68",
-			accent4 = "#9ece6a",
-			accent5 = "#0DB9D7",
-			accent6 = "#9d7cd8",
-			dimmed1 = "#000000",
-			dimmed2 = "#000000",
-			dimmed3 = "#000000",
-			dimmed4 = "#363b54",
-			dimmed5 = "#16161e",
+			dimmed5 = "#000000",
 		}
 	end,
 }
