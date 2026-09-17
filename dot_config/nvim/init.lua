@@ -47,6 +47,7 @@ vim.pack.add({
     'https://github.com/stevearc/oil.nvim',
     'https://github.com/m4xshen/autoclose.nvim',
     'https://github.com/nvim-mini/mini.surround',
+    'https://github.com/nvim-mini/mini.completion',
 })
 
 
@@ -60,6 +61,8 @@ require('oil').setup()
 require('autoclose').setup()
 
 require('mini.surround').setup()
+
+require('mini.completion').setup()
 
 -- ###
 -- LSP
