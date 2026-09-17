@@ -70,9 +70,9 @@ require('monokai-pro').setup {
 			accent4 = "#9ece6a",
 			accent5 = "#0DB9D7",
 			accent6 = "#9d7cd8",
-			dimmed1 = "#737aa2",
-			dimmed2 = "#787c99",
-			dimmed3 = "#363b54",
+			dimmed1 = "#000000",
+			dimmed2 = "#000000",
+			dimmed3 = "#000000",
 			dimmed4 = "#363b54",
 			dimmed5 = "#16161e",
 		}
