@@ -54,7 +54,7 @@ vim.pack.add({
 
 require('vague').setup { transparent = true }
 require('monokai-pro').setup { transparent_background = true }
-vim.cmd.colorscheme('vague')
+vim.cmd.colorscheme('monokai-pro')
 
 require('fzf-lua').setup { fzf_colors = true }
 
