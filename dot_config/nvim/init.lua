@@ -49,7 +49,7 @@ require("oil").setup()
 require("autoclose").setup()
 
 -- LSP
--- vim.lsp.enable('clangd')
+vim.lsp.enable('clangd')
 
 -- keybinds
 -- Oil
