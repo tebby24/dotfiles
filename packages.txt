@@ -38,7 +38,6 @@ ttf-terminus-nerd
 usbutils
 xarchiver
 xclip
-xwallpaper
 zathura
 zsh
 nvm
@@ -67,4 +66,3 @@ wl-clipboard
 kanshi
 clang
 pyright
-feh
