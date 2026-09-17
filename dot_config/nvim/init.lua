@@ -3,8 +3,6 @@ vim.loader.enable()
 
 vim.g.mapleader = " "
 
-vim.g.have_nerd_font = true
-vim.o.number = true 
 vim.o.mouse = 'a'
 vim.o.relativenumber = true
 vim.o.clipboard = 'unnamedplus'
@@ -32,9 +30,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- plugins
-
 vim.cmd.packadd('nohlsearch')
-
 vim.pack.add({
     'https://github.com/vague-theme/vague.nvim',
     'https://github.com/neovim/nvim-lspconfig',
