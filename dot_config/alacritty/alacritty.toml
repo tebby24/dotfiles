@@ -16,3 +16,12 @@ padding = { x = 12, y = 12 }
 dynamic_padding = true
 opacity = 1
 
+[[keyboard.bindings]]
+key = "Tab"
+mods = "Control"
+chars = "\u001b[9;5u"
+
+[[keyboard.bindings]]
+key = "Tab"
+mods = "Control|Shift"
+chars = "\u001b[9;6u"
