@@ -80,7 +80,7 @@ require('mini.completion').setup()
 -- LSP
 -- ###
 
-vim.lsp.enable({'clangd', 'pyright'})
+vim.lsp.enable({'clangd', 'pyright', 'jdtls'})
 
 -- ########
 -- KEYBINDS
