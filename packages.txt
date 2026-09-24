@@ -66,3 +66,4 @@ wl-clipboard
 kanshi
 clang
 pyright
+firefox
