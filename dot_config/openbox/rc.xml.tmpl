@@ -285,10 +285,7 @@
                 <y>0</y>
                 <width>100%</width>
                 <height>100%</height>
-            </action>
-        </keybind>
-
-        <keybind key="W-Left">
+            </acti
             <action name="MoveResizeTo">
                 <x>0</x>
                 <y>0</y>
@@ -406,6 +403,13 @@
             <command>~/scripts/shared/screen-capture</command>
           </action>
         </keybind>
+
+        <keybind key="W-t">
+          <action name="Execute">
+            <command>bash -c 'tts "$(xclip -o -selection clipboard)"'</command>
+          </action>
+        </keybind>
+
 
     </keyboard>
     <mouse>
