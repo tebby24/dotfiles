@@ -1,0 +1,171 @@
+#!/usr/bin/env bash
+#
+# tts -- text-to-speech via the OpenRouter speech API (Qwen Audio 3.0 TTS Flash).
+#
+#   tts "text to speak"
+#   echo "text to speak" | tts
+#
+# It generates speech (MP3), plays it in mpv, and copies the resulting file to
+# the clipboard the same way a file manager does, so it can be pasted/uploaded
+# as a file (into an LLM, Anki, etc.) rather than as a path.
+#
+# NOTE: The OpenRouter speech endpoint defaults to response_format "pcm", so we
+# explicitly request "mp3" (audio/mpeg).  If a model returns raw PCM anyway
+# (audio/pcm;rate=...;channels=...), it is converted locally with ffmpeg, since
+# a raw PCM stream is not playable merely by renaming it to .mp3.
+
+set -uo pipefail
+
+# ---------------------------------------------------------------------------
+# Configuration
+# ---------------------------------------------------------------------------
+SECRET_KEY_PATH="${HOME}/.config/secrets/openrouter-tts-key"
+CACHE_DIR="${HOME}/.cache/tts"
+MODEL="qwen/qwen-audio-3.0-tts-flash"
+VOICE="${TTS_VOICE:-loongjohn}"
+API_URL="https://openrouter.ai/api/v1/audio/speech"
+
+mkdir -p "$CACHE_DIR"
+
+die() { printf 'tts: %s\n' "$*" >&2; exit 1; }
+
+# ---------------------------------------------------------------------------
+# 1. Read the API key
+# ---------------------------------------------------------------------------
+[ -f "$SECRET_KEY_PATH" ] || die "API key file not found at $SECRET_KEY_PATH"
+API_KEY=$(tr -d '[:space:]' < "$SECRET_KEY_PATH")
+[ -n "$API_KEY" ] || die "API key file at $SECRET_KEY_PATH is empty"
+
+# ---------------------------------------------------------------------------
+# 2. Get the text to speak (arguments, or stdin)
+# ---------------------------------------------------------------------------
+if [ "$#" -gt 0 ]; then
+    INPUT_TEXT="$*"
+elif [ ! -t 0 ]; then
+    INPUT_TEXT=$(cat)
+else
+    echo "Usage: tts <text to speak>" >&2
+    echo "   or: echo 'text to speak' | tts" >&2
+    exit 1
+fi
+
+if [ -z "${INPUT_TEXT//[[:space:]]/}" ]; then
+    die "no text provided"
+fi
+
+# ---------------------------------------------------------------------------
+# 3. Request the speech (MP3) and turn it into a playable file
+# ---------------------------------------------------------------------------
+RAW_FILE=$(mktemp --tmpdir="$CACHE_DIR" raw.XXXXXX.bin)
+HEADER_FILE=$(mktemp --tmpdir="$CACHE_DIR" hdr.XXXXXX)
+trap 'rm -f "$RAW_FILE" "$HEADER_FILE"' EXIT
+
+PAYLOAD=$(jq -n \
+    --arg model "$MODEL" \
+    --arg input "$INPUT_TEXT" \
+    --arg voice "$VOICE" \
+    '{model: $model, input: $input, voice: $voice, response_format: "mp3"}')
+
+echo "Generating speech with Qwen Audio 3.0 TTS Flash..." >&2
+
+HTTP_CODE=$(curl -sS -w '%{http_code}' -D "$HEADER_FILE" -o "$RAW_FILE" \
+    "$API_URL" \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $API_KEY" \
+    -d "$PAYLOAD") || die "failed to reach the OpenRouter API"
+
+RAW_SIZE=$(wc -c < "$RAW_FILE" | tr -d '[:space:]')
+if [ "$HTTP_CODE" != "200" ] || [ "$RAW_SIZE" -lt 1000 ]; then
+    {
+        printf 'tts: API request failed (HTTP %s)\n' "$HTTP_CODE"
+        printf 'Response:\n'
+        head -c 2000 "$RAW_FILE"
+        printf '\n'
+    } >&2
+    exit 1
+fi
+
+CONTENT_TYPE=$(awk 'BEGIN{IGNORECASE=1} /^content-type:/{sub(/^[^:]*:[[:space:]]*/,""); sub(/\r$/,""); print; exit}' "$HEADER_FILE")
+
+FINAL_FILE=""
+
+if printf '%s' "$CONTENT_TYPE" | grep -qi 'audio/pcm'; then
+    RATE=$(printf '%s' "$CONTENT_TYPE" | sed -n 's/.*rate=\([0-9]*\).*/\1/p'); RATE=${RATE:-24000}
+    CHANNELS=$(printf '%s' "$CONTENT_TYPE" | sed -n 's/.*channels=\([0-9]*\).*/\1/p'); CHANNELS=${CHANNELS:-1}
+
+    if command -v ffmpeg >/dev/null 2>&1; then
+        FINAL_FILE="$CACHE_DIR/tts_$(date +%s).mp3"
+        ffmpeg -nostdin -loglevel error -y \
+            -f s16le -ar "$RATE" -ac "$CHANNELS" -i "$RAW_FILE" \
+            -codec:a libmp3lame -q:a 2 "$FINAL_FILE" \
+            || die "failed to convert PCM audio to MP3"
+    elif command -v python3 >/dev/null 2>&1; then
+        # No ffmpeg: at least wrap the PCM in a WAV container so it is playable.
+        FINAL_FILE="$CACHE_DIR/tts_$(date +%s).wav"
+        python3 - "$RAW_FILE" "$FINAL_FILE" "$RATE" "$CHANNELS" <<'PY'
+import os, shutil, struct, sys
+raw, out, rate, channels = sys.argv[1], sys.argv[2], int(sys.argv[3]), int(sys.argv[4])
+data_len = os.path.getsize(raw)
+byte_rate = rate * channels * 2
+with open(out, "wb") as o:
+    o.write(b"RIFF" + struct.pack("<I", 36 + data_len) + b"WAVE")
+    o.write(b"fmt " + struct.pack("<IHHIIHH", 16, 1, channels, rate, byte_rate, channels * 2, 16))
+    o.write(b"data" + struct.pack("<I", data_len))
+    with open(raw, "rb") as i:
+        shutil.copyfileobj(i, o)
+PY
+    else
+        die "cannot make the PCM audio playable: install ffmpeg (or python3)"
+    fi
+else
+    # The API returned an already-encoded container (e.g. audio/mpeg).
+    ext="mp3"
+    printf '%s' "$CONTENT_TYPE" | grep -qi 'audio/wav' && ext="wav"
+    FINAL_FILE="$CACHE_DIR/tts_$(date +%s).${ext}"
+    cp -- "$RAW_FILE" "$FINAL_FILE"
+fi
+
+[ -s "$FINAL_FILE" ] || die "no audio file was produced"
+
+# ---------------------------------------------------------------------------
+# 4. Copy the file to the clipboard like a file manager does.
+#
+#    A plain text path is not enough.  When you copy a file in a file manager it
+#    puts the file on the CLIPBOARD selection as a `text/uri-list`, which is what
+#    browsers (LLM uploads) and Anki/Qt read on paste to pull in the actual file.
+# ---------------------------------------------------------------------------
+copy_file_to_clipboard() (
+    file="$1"
+    abs=$(realpath -- "$file") || exit 1
+    uri="file://$abs"
+
+    if [ "${XDG_SESSION_TYPE:-}" = "wayland" ] && command -v wl-copy >/dev/null 2>&1; then
+        printf '%s\r\n' "$uri" | wl-copy --type text/uri-list
+        printf 'Copied to clipboard (Wayland).\n' >&2
+        return 0
+    fi
+
+    if command -v xclip >/dev/null 2>&1; then
+        printf '%s\r\n' "$uri" | xclip -selection clipboard -t text/uri-list
+        printf 'Copied to clipboard (X11).\n' >&2
+        return 0
+    fi
+
+    printf 'Warning: install xclip (X11) or wl-copy (Wayland) to copy the file to the clipboard.\n' >&2
+    return 1
+)
+
+# Copy first so the file is on the clipboard immediately, independently of mpv.
+copy_file_to_clipboard "$FINAL_FILE" || true
+
+# ---------------------------------------------------------------------------
+# 5. Play it in mpv (a playback problem must not stop us from copying the file,
+#    which already happened above).
+# ---------------------------------------------------------------------------
+echo "Saved to: $FINAL_FILE" >&2
+if command -v mpv >/dev/null 2>&1; then
+    mpv --force-window=yes -- "$FINAL_FILE" \
+        || printf 'tts: mpv could not play the file (still saved at %s)\n' "$FINAL_FILE" >&2
+else
+    printf 'tts: mpv not found; audio saved at %s\n' "$FINAL_FILE" >&2
+fi
