@@ -405,9 +405,9 @@
         </keybind>
 
         <keybind key="W-t">
-          <action name="Execute">
-            <command>bash -c 'tts "$(xclip -o -selection clipboard)"'</command>
-          </action>
+            <action name="Execute">
+                <command>bash -c 'export DISPLAY=:0; tts "$(xclip -o -selection clipboard)"'</command>
+            </action>
         </keybind>
 
 
