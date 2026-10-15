@@ -3,9 +3,6 @@
 # Get primary monitor name from xrandr
 MONITOR=$(xrandr | awk '/ primary/{print $1}')
 
-# Fallback in case no primary is set
-MONITOR=$(xrandr | awk '/ connected/{print $1; exit}')
-
 # Rotate tablet 180°
 xsetwacom set "Wacom Intuos S Pen stylus" Rotate half
 
